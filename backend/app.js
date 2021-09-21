@@ -10,15 +10,15 @@ const helmet = require("helmet");
 //Donne accès aux chemins du système de fichiers
 const path = require ('path');
 
-//Importation des routers
-//const saucesRoutes = require('./routes/saucesRoutes.js');
-//const userRoutes = require('./routes/userRoutes.js');
-
 // Cette ligne indique qu'on peut appeler Express avec la constante app
 const app = express();
 
-//importe le plugin mongo-sanitize, empêche les injections NoSQL
-const mysql = require('mysql');
+//initialiser DataBase, si elle n'existe pas
+require("./database/initialisation")
+
+//Importation des routers
+//const saucesRoutes = require('./routes/saucesRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 //importe le rate limiter pour protéger des attaques force brute
 const rateLimit = require("express-rate-limit");
@@ -30,32 +30,6 @@ const limiter = rateLimit({
   max: maxRequests, //chaque IP est limitée à 100 requétes
 })
 
-
-//Constantes de connections à la BDD
-
-const host = process.env.MYSQL_HOST 
-const user = process.env.MYSQL_USER
-const password = process.env.MYSQL_PASSWORD 
-const database = process.env.MYSQL_DATABASE
-
-//test de connection MYSQL
-app.get("/user/:id"), (req, res) => {
-  console.log("fetching user with id : " + req.params.id)
-
-  const connection = mysql.createConnection({
-      host:host,
-      user:user,
-      password:password,
-      database:database
-  })
-
-  connection.query("SELECT * FROM users", (err, rows, fields) =>{
-    console.log(" fetching users")
-  })
-res.end()
-}
-
-/*
 //Ce middleware indique dans la console du serveur qu'une requête a été reçue.
 app.use((req, res, next) => {
   console.log('Requête reçue!')
@@ -82,10 +56,8 @@ app.use(
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Ces middlewares contiennent le début des routes à appliquer aux stuffRoutes et userRoutes. et se servent des routes contenues dans les fichiers routeurs pour traiter les requêtes.
-//app.use('/api/sauces', saucesRoutes)
-//app.use('/api/auth', userRoutes) */
-
-
+//app.use('/api/posts', postsRoutes)
+app.use('/api/account', userRoutes) 
 
 module.exports = app;
 
