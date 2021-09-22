@@ -14,7 +14,7 @@ const path = require ('path');
 const app = express();
 
 //initialiser DataBase, si elle n'existe pas
-require("./database/initialisation")
+//require("./database/initialisation")
 
 //Importation des routers
 //const saucesRoutes = require('./routes/saucesRoutes.js');
@@ -49,7 +49,6 @@ app.use(
   limiter,
   helmet(), //helmetJS pour sécuriser les headers
   express.json(),
-  //mongoSanitize() //MongoSanitize bloque les injections SQL
 );
 
 //Ce middleware sert à gérer les requêtes get d'images

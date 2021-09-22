@@ -2,6 +2,8 @@
 //Cette ligne appelle le plugin dotenv qui sécurise l'environnement du serveur
 require('dotenv').config()
 
+//Appelle le fichier
+
 //Ce fichier sert à connecter l'API à la base de données
 //importation framework Sequelize
 const Sequelize = require("sequelize");

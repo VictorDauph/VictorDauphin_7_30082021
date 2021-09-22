@@ -1,3 +1,4 @@
 node_modules
 SQLFiles
 .env
+backend/config/config.json
