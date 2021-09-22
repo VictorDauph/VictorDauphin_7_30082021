@@ -22,6 +22,14 @@ module.exports = {
         type: Sequelize.JSON,
         defaultValue:"[]"
     },
+    createdAt: {
+      type: Sequelize.DATE,
+      allowNull:false, 
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    allowNull:false, 
+},
     })
   },
 

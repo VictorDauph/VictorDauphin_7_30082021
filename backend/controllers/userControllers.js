@@ -72,7 +72,7 @@ exports.login = (req, res, next) => {
     .catch(error => res.status.status(500).json({ error }))
 };
 
-//fonction de suppression utilisateur. FindOne ne marche pas. Peut-être qu'il peut être utile? Pour l'instant tous les utilisateurs peuvent supprimer n'importe quel autre utilisateur.
+//fonction de suppression utilisateur.
 exports.delete = (req, res, next) =>{
     console.log("authorized delete request")
     User.findOne({userId: req.params.id})

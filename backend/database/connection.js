@@ -1,6 +1,6 @@
 //importation config BDD
 //Cette ligne appelle le plugin dotenv qui sécurise l'environnement du serveur
-require('dotenv').config()
+const config = require("../config/config.json")
 
 //Appelle le fichier
 
@@ -9,9 +9,9 @@ require('dotenv').config()
 const Sequelize = require("sequelize");
 
 //Connection à la BDD MySql
-const sequelize = new Sequelize(process.env.DATABASE, process.env.DBUSERNAME, process.env.DBPASSWORD, {
+const sequelize = new Sequelize(config.development.database, config.development.username, config.development.password, {
     dialect: "mysql",
-    host: process.env.HOST
+    host: config.development.host
   }); 
 
 
