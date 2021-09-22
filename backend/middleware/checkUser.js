@@ -10,9 +10,8 @@ module.exports = (req, res, next) => {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, secretKey); //clé de cryptage. elle doit correspondre à la clé utilisée dans la fonction login.
         const userId = decodedToken.userId;
-        console.log("token user ID: ", userId, "http request id: ", req.params.id )
-        
-        if (req.params.id != userId){ // Si l'userId passé par la requête http est différent de celui contenu dans le token
+        console.log("token user ID: ", userId, "http request id: ", req.params.userId )
+        if (req.params.userId != userId){ // Si l'userId passé par la requête http est différent de celui contenu dans le token
             throw 'Action non autorisée pour cet utilisateur';
         } else {
             next(); /*Ce middleware est utilisé par d'autres middlewares avant de faire quoi que se soit. si l'authentification rate, 

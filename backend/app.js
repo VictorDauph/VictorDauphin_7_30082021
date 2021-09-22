@@ -17,7 +17,7 @@ const app = express();
 //require("./database/initialisation")
 
 //Importation des routers
-//const saucesRoutes = require('./routes/saucesRoutes.js');
+const postRoutes = require('./routes/postRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
 
 //importe le rate limiter pour protéger des attaques force brute
@@ -55,7 +55,7 @@ app.use(
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Ces middlewares contiennent le début des routes à appliquer aux stuffRoutes et userRoutes. et se servent des routes contenues dans les fichiers routeurs pour traiter les requêtes.
-//app.use('/api/posts', postsRoutes)
+app.use('/api/post', postRoutes)
 app.use('/api/account', userRoutes) 
 
 module.exports = app;

@@ -1,9 +1,10 @@
 //Cette ligne importe les schéma de donnée Sauce dans saucesModels.js
-const Sauce= require('../models/saucesModels');
+const Post= require('../models/post');
 
 //Cette ligne importe file system, qui permet de gérer des fichiers (notemment pour la suppression d'images du dossier images)
 const fs = require('fs');
 
+/*
 //cette fonction sert à liker et disliker les sauces
 exports.likeSauce= (req, res, next) =>{
   const likevalue = req.body.like;
@@ -60,26 +61,27 @@ exports.likeSauce= (req, res, next) =>{
   })
   .catch(error => res.status(500).json({error}));
   
-} 
+} */
 
-//cette fonction sert à créer des objets et est exportée pour le fichier router stuff.js
- exports.createSauce = (req, res, next) =>{
-    const sauceObject = JSON.parse(req.body.sauce);
-    delete sauceObject._id; //il faut supprimer l'id généré par le front, car on souhaite conserver l'ID généré par Mongoose.
-    const sauce = new Sauce ({
-      ...sauceObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet Sauce et des données contenues dans la requête.
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-      likes : 0,
-      dislikes : 0,
+
+//cette fonction sert à créer des posts et est exportée pour le fichier router postRoutes.js
+ exports.createPost = (req, res, next) =>{
+  console.log("demande de création de post autorisée")
+    const postObject = req.body;
+    console.log("création du post", postObject)
+    const post = new Post ({
+      ...postObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet Post et des données contenues dans la requête.
+      //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, //sert à créer une URL selon les méthodes propres à Multer, désactiver pour des tests avec Postman, activer pour la gestion d'images
       usersLiked : [],
       usersdisLiked : []
     });
-    sauce.save() //Save est une méthode des schémas de données qui sauvegarde un objet dans la base.
+    post.save() //Save est une méthode des schémas de données qui sauvegarde un objet dans la base.
     .then(() => res.status(201).json({message: 'objet enregistré'}))
-    .catch(error => res.status(400).json({error}));
+    .catch(error => res.status(400).json({error}));  
   };
 
 
+  /*
 //Fonction de modification de sauces
   exports.modifySauce =  (req, res, next) =>{
     Sauce.findOne({ _id: req.params.id}) 
@@ -107,24 +109,35 @@ exports.likeSauce= (req, res, next) =>{
 
     .catch(error => res.status(500).json({error})) 
   }; 
+  */
 
 
 
-//fonction de suppression d'objets
-  exports.deleteSauce = (req, res, next) =>{
-    Sauce.findOne({ _id: req.params.id}) //on cherche l'objet dans la base de données
-    .then( sauce => {
-      const filename = sauce.imageUrl.split('/images')[1] //filename récupère le nom du fichier à supprimer
-      fs.unlink(`images/${filename}`, ()=> { //fs.unlink supprime le fichier image, puis le callback supprime l'objet
-        Sauce.deleteOne({_id: req.params.id})
-        .then(() => res.status(200).json({ message: 'sauce supprimée'}))
-        .catch(error => res.status(404).json({error}));
-      })
+//fonction de suppression des posts
+  exports.deletePost = (req, res, next) =>{
+    console.log("demande de suppression du post : ", req.params.postId)
+    return Post.findOne({ where: {postId: req.params.postId }}) //on cherche l'objet dans la base de données
+    .then( post => {
+      if(post.userId != req.params.userId)
+        {
+          res.status(500).json({message:"l'utilisateur n'a pas l'autorisation de supprimer ce post"})
+        }
+        /*
+        const filename = post.imageUrl.split('/images')[1] //filename récupère le nom du fichier à supprimer
+        fs.unlink(`images/${filename}`, ()=> { //fs.unlink supprime le fichier image, puis le callback supprime l'objet
+        */
+       else{
+          post.destroy({ where: {postId: req.params.postId }})
+          .then(() => res.status(200).json({ message: 'post supprimé'}))
+          .catch(error => res.status(404).json({error}));
+            }
+        /*}) La fonction de suppression de l'image sera à gérer une fois l'envoie d'objet côte front implémenté*/
     })
     .catch(error => res.status(500).json({error}));
 
   }; 
 
+  /*
 // Fonction de récupération d'un objet unique
 exports.getOneSauce = (req, res, next) =>{
     Sauce.findOne({_id: req.params.id}) //_id est le champs de l'objet thing évalué, req.params.id est la valeur recherchée passée par la requête HTTP (:id). On va donc regarder tous les objets dans la BDD et chercher celui qui a le bon ID.
@@ -138,3 +151,4 @@ exports.getSauces = (req, res, next) => {
     .then(sauces => res.status(200).json(sauces)) //things, c'est tous les objets Thing trouvés dans la BDD qui sont retournés, un par un, jusqu'à ce qu'ils soient tous retournés.
     .catch(error => res.status(400).json({error}));
     }
+*/

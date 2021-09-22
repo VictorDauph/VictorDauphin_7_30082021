@@ -47,27 +47,29 @@ exports.signup = (req, res, next) => {
 
 //Fonction de login utilisateur
 exports.login = (req, res, next) => {
-    console.log("demande de login",req.body.email,req.body.password)
-    User.findOne({ email: req.body.email })
+    const bodyEmail = req.body.email
+    console.log("demande de login",bodyEmail,req.body.password)
+    return User.findOne({where:{email: bodyEmail}})
     .then(user => {
-        if(!user) {
-            return res.status(401).json({ error: 'Utilisateur non trouvé'});
-        }
-        bcrypt.compare(req.body.password, user.password)
-        .then( valid => {
-            if (!valid) {
-                return res.status(401).json({ error: 'Mot de pass invalide'})
+            if(!user) {
+                return res.status(401).json({ error: 'Utilisateur non trouvé'});
             }
-            res.status(200).json({
-                userId: user.userId,
-                token: jwt.sign(
-                    { userId:user.userId}, //permet d'encoder l'information du user Id dans le token. Ce qui permettra de vérifier le user ID à la modification d'objets.
-                    secretKey, //clé secrète d'encodage
-                    { expiresIn: tokenValidity} //configuration d'expiration du token.
-                )
-            });
-        })
-        .catch(error => res.status(500).json({error}));
+            bcrypt.compare(req.body.password, user.password)
+            .then( valid => {
+                console.log("userId sending: ", user.userId)
+                if (!valid) {
+                    return res.status(401).json({ error: 'Mot de pass invalide'})
+                }
+                res.status(200).json({
+                    userId: user.userId,
+                    token: jwt.sign(
+                        { userId:user.userId}, //permet d'encoder l'information du user Id dans le token. Ce qui permettra de vérifier le user ID à la modification d'objets.
+                        secretKey, //clé secrète d'encodage
+                        { expiresIn: tokenValidity} //configuration d'expiration du token.
+                    )
+                });
+            })
+            .catch(error => res.status(500).json({error}));
     })
     .catch(error => res.status.status(500).json({ error }))
 };
@@ -75,10 +77,10 @@ exports.login = (req, res, next) => {
 //fonction de suppression utilisateur.
 exports.delete = (req, res, next) =>{
     console.log("authorized delete request")
-    User.findOne({userId: req.params.id})
+    User.findOne({userId: req.params.userId})
     .then( user => { 
         user.destroy({
-            where: {userId: req.params.id}
+            where: {userId: req.params.userId}
             })
         .then(() => res.status(200).json({ message: 'Utilisateur supprimé'}))
         .catch(error => res.status(404).json({error}));
