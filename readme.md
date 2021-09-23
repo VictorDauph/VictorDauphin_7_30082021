@@ -13,17 +13,22 @@ Création base de données:
 *les noms indiqués sont des exemples, vous pouvez choisir les noms et mots de passes à votre convenance.
 
 Cloner l'API
-1) cloner le projet
-2) Installer les dépendances nécessaires au serveur backend, avec le terminal depuis le dossier backend: 
+1) Créer un repo git dans le dossier de votrer choix:
+git init
+
+2) cloner le projet avec le terminal depuis le dossier du projet:
+git pull https://github.com/VictorDauph/VictorDauphin_7_30082021.git
+
+3) Installer les dépendances nécessaires au serveur backend, avec le terminal depuis le dossier backend: 
 npm install
-3)Créer le fichier "./backend/.env" . Ce fichier contient des variables d'environnement indispensables au fonctionnement de l'API. Exemple de contenu à copier coller dans le fichier .env:
+4)Créer le fichier "./backend/.env" . Ce fichier contient des variables d'environnement indispensables au fonctionnement de l'API. Exemple de contenu à copier coller dans le fichier .env:
 
 PORT = 3000
 SECRET_KEY = "SuuPthNrUjrN"
 MAX_REQUESTS = 100
 TOKEN_VALIDITY = "2h"
 
-4) Créer le fichier ./backend/config/config.json qui permet à l'API de se connecter à la base de donnée:
+5) Créer le fichier ./backend/config/config.json qui permet à l'API de se connecter à la base de donnée:
 
 {
   "development": {
@@ -35,7 +40,7 @@ TOKEN_VALIDITY = "2h"
   }
 }
 
-5) Créer les tables en utilisant les migrations. Avec le terminal, depuis le dossier backend:
+6) Créer les tables en utilisant les migrations. Avec le terminal, depuis le dossier backend:
 sequelize db:migrate   
 
 L'API devrait fonctionner correctement et avoir créés les tables dans la base de données.
