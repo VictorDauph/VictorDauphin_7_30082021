@@ -43,5 +43,6 @@ L'API devrait fonctionner correctement et avoir créés les tables dans la base 
 Mise en route serveur backend:
 
 depuis le dossier backend, dans le terminal:
+
 nodemon server
 
