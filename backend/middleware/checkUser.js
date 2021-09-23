@@ -1,3 +1,4 @@
+//Ce middleware sert à vérifier qu'un utilisateur authentifié ne fait pas uen action non autorisée, comme supprimer le compte d'un autre utilisateur, supprimer ou modifier le post d'un autre utilisateur.
 //Json web Token sert à hacher
 const jwt = require('jsonwebtoken');
 

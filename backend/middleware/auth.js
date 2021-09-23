@@ -1,4 +1,5 @@
-//Json web Token sert à hacher
+//Ce middleware sert à vérifier qu'un utilisateur s'est bien loggé pour faire des actions qui demandent d'être authentifié, comme regarder les posts des autres utilisateurs, ou intéragir de quelque manière que se soit avec le contenu de l'application.
+//Json web Token sert à vérifier les token des utilisateurs
 const jwt = require('jsonwebtoken');
 
 //Importation clé secrète de cryptage des tokens contenu dans le fichier .env.
@@ -18,6 +19,6 @@ module.exports = (req, res, next) => {
                         alors il bloque le processus. Sinon il passe au middleware suivant.*/
          }
     } catch (error) {
-        res.status(401).json({error});
+        res.status(401).json({message:"authentification échouée"});
     }
 };

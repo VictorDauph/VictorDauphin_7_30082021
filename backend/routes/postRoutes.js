@@ -1,3 +1,4 @@
+//importation des dépendances
 //importation framework express
 const express = require('express');
 
@@ -16,22 +17,24 @@ const checkUser = require("../middleware/checkUser")
 //importation du middleware de config multer (gestion fichiers)
 const multer = require('../middleware/multer-config')
 
+//Définition des routes
 //Ce middleware créé une route POST pour liker et disliker les posts
-//router.post('/:id/like', auth, postCtrl.likePost);
+router.post('/:postId/like',auth,postCtrl.likePost);
 
-//Ce middleware créé une route POST pour ajouter des sauces. Il utilise le schéma de données Post comme une classe et le contenu de la requête pour créer une instance de Post.
+//Ce middleware créé une route POST pour ajouter des posts. Il utilise le schéma de données Post comme une classe et le contenu de la requête pour créer une instance de Post.
 router.post('/', auth, multer, postCtrl.createPost);
-
-//route put pour modification d'un post.
-//router.put ('/:id', auth, multer, saucesCtrl.modifyPost);
 
 //route delete pour suppression d'un post
 router.delete('/:postId/:userId',auth,checkUser,postCtrl.deletePost );
 
-//route get dynamique, pour que le front-end puisse aller chercher tous les posts d'un utilisateur. Les : indiquent à Express que cette partie de la route est dynamique
-//router.get('/:id', auth, postCtrl.getPostsFromUser );
-
 // Cette route va chercher tous les posts pour les passer au frontend. Les posts sont formatés selon ce qui est attendu par le front-end.
-//router.get('/', auth, postCtrl.getPosts);
+router.get('/', auth, postCtrl.getAllPosts);
+
+// Cette route va chercher un post unique avec son id.
+router.get('/single/:postId', auth, postCtrl.getOnePost);
+
+// Cette route va chercher tous les posts d'un utilisateur
+router.get('/fromUser/:userId', auth, postCtrl.getPostsFromUser);
+
 
 module.exports = router;
