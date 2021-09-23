@@ -25,7 +25,7 @@ Cloner l'API
 
 ./backend: npm install
 
-4)Créer le fichier "./backend/.env" . Ce fichier contient des variables d'environnement indispensables au fonctionnement de l'API. Exemple de contenu à copier coller dans le fichier .env:
+4) Créer le fichier "./backend/.env" . Ce fichier contient des variables d'environnement indispensables au fonctionnement de l'API. Exemple de contenu à copier coller dans le fichier .env:
 
 PORT = 3000
 SECRET_KEY = "SuuPthNrUjrN"
