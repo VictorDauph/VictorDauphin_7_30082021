@@ -28,8 +28,11 @@ Cloner l'API
 4) Créer le fichier "./backend/.env" . Ce fichier contient des variables d'environnement indispensables au fonctionnement de l'API. Exemple de contenu à copier coller dans le fichier .env:
 
 PORT = 3000
+
 SECRET_KEY = "SuuPthNrUjrN"
+
 MAX_REQUESTS = 100
+
 TOKEN_VALIDITY = "2h"
 
 5) Créer le fichier ./backend/config/config.json qui permet à l'API de se connecter à la base de donnée:
