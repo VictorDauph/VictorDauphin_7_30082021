@@ -9,18 +9,19 @@ Pour faire fonctionner cette application en local il faut suivre les étapes sui
 Création base de données:
 1) installer MySql sur votre machine.
 2) Créer une Base de données MySql (name:BDDNAME)*
-3) créer un utilisateur qui a tous les droits sur cette base de données (username:USERNAME, password:PASSWORD)*
+3) créer un utilisateur et lui donner tous les droits sur cette base de données (username:USERNAME, password:PASSWORD)*
 *les noms indiqués sont des exemples, vous pouvez choisir les noms et mots de passes à votre convenance.
 
 Cloner l'API
 1) Créer un repo git dans le dossier de votrer choix:
-git init
+./: git init
 
 2) cloner le projet avec le terminal depuis le dossier du projet:
-git pull https://github.com/VictorDauph/VictorDauphin_7_30082021.git
+./: git pull https://github.com/VictorDauph/VictorDauphin_7_30082021.git
 
 3) Installer les dépendances nécessaires au serveur backend, avec le terminal depuis le dossier backend: 
-npm install
+./backend: npm install
+
 4)Créer le fichier "./backend/.env" . Ce fichier contient des variables d'environnement indispensables au fonctionnement de l'API. Exemple de contenu à copier coller dans le fichier .env:
 
 PORT = 3000
