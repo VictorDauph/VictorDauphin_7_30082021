@@ -14,12 +14,15 @@ Création base de données:
 
 Cloner l'API
 1) Créer un repo git dans le dossier de votrer choix:
+
 ./: git init
 
 2) cloner le projet avec le terminal depuis le dossier du projet:
+
 ./: git pull https://github.com/VictorDauph/VictorDauphin_7_30082021.git
 
 3) Installer les dépendances nécessaires au serveur backend, avec le terminal depuis le dossier backend: 
+
 ./backend: npm install
 
 4)Créer le fichier "./backend/.env" . Ce fichier contient des variables d'environnement indispensables au fonctionnement de l'API. Exemple de contenu à copier coller dans le fichier .env:
