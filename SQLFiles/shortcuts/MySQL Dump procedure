@@ -1,4 +1,0 @@
-ouvrir CMD en administrateur
-set PATH=%PATH%;“C:\Program Files\MySQL\MySQL Server 8.0\bin”
-cd "C:\outils_code\local_repo\VictorDauphin_7_30082021\SQLFiles\DatabaseFiles"
-mysqldump -u GroupoAdmin -p --opt Groupomania > GroupoBackup.sql

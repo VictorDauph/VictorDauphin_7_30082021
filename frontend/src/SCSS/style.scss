@@ -1,0 +1,6 @@
+/* Lancers Sass : 
+sass --watch frontend/src/SCSS/style.scss:frontend/src/CSS/style.css 
+*/
+
+@import "variables_overrides";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
