@@ -10,8 +10,13 @@ const helmet = require("helmet");
 //Donne accès aux chemins du système de fichiers
 const path = require ('path');
 
+//Cette lign importe le module qui gère la sécurité CORS
+const cors = require("cors");
+
 // Cette ligne indique qu'on peut appeler Express avec la constante app
 const app = express();
+
+
 
 //initialiser DataBase, si elle n'existe pas
 //require("./database/initialisation")
@@ -36,16 +41,22 @@ app.use((req, res, next) => {
   next();
 }); 
 
+/*
 //ce middleware génère des headers pour gérer la sécurité CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  console.log("fabrication headers");
+
+    origin: 'http://localhost:3000',
+    cors: true
+
+  console.log("headers frabriqués")
   next();
 });
+*/
 
 //Ce middleware parse le body de toutes les requêtes en JSON pour être utilisables.
 app.use(
+  cors(),
   limiter,
   helmet(), //helmetJS pour sécuriser les headers
   express.json(),
