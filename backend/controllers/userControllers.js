@@ -33,14 +33,14 @@ exports.signup = (req, res, next) => {
                 });
                 user.save()
                 .then(() => res.status(201).json({message: 'utilisateur créé'}))
-                .catch(error => res.status(400).json({error}));
+                .catch(error => res.status(400).json({message:"echec de la éation de l'utilisateur" ,error}));
             })
             .catch(error => res.status(500).json({error}));
         }
     else
         {
             const error = schemaPassword.validate(req.body.password, { list: true })
-            res.status(428).json({error});
+            res.status(401).json({message:"echec de la création de l'utilisateur",error});
         } 
 
 };

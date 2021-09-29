@@ -22,4 +22,9 @@ module.exports = sequelize.define("User", { //1er paramètre = nom du modèle, s
         type : Sequelize.STRING(60),
         allowNull:false, 
         },
+    role: {
+        type : Sequelize.STRING(60),
+        allowNull:false,
+        defaultValue:"standard" 
+        },
 });

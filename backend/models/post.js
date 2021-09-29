@@ -33,4 +33,8 @@ module.exports = sequelize.define("Post", { //1er paramètre = nom du modèle, s
         type: Sequelize.JSON,
         defaultValue:"[]"
     },
+    flagged:{
+        type: Sequelize.BOOLEAN,
+        defaultValue:false 
+      },
 });
