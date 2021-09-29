@@ -29,7 +29,7 @@ class App extends React.Component {
         ).then(res => {
             console.log("status pre-json",res.status)
             return res.json()}).then(data =>{
-            this.setState({message:"message: "+data.message}).catch(err => console.log("erreure attrappée"))
+            this.setState({message:"message: "+data.message})//.catch(err => console.log("erreure attrappée"))
         }) 
                
 
