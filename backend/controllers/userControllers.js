@@ -63,7 +63,10 @@ exports.login = (req, res, next) => {
                 res.status(200).json({
                     userId: user.userId,
                     token: jwt.sign(
-                        { userId:user.userId}, //permet d'encoder l'information du user Id dans le token. Ce qui permettra de vérifier le user ID à la modification d'objets.
+                        { 
+                            userId:user.userId, //permet d'encoder l'information du user Id dans le token. Ce qui permettra de vérifier le user ID à la modification d'objets.
+                            role:user.role //encode le rôle de l'utilisateur dans le token pour différencier les admin des utilisateurs standards.
+                        }, 
                         secretKey, //clé secrète d'encodage
                         { expiresIn: tokenValidity} //configuration d'expiration du token.
                     )

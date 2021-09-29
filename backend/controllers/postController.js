@@ -1,4 +1,4 @@
-//Cette ligne importe les schéma de donnée Sauce dans saucesModels.js
+//Cette ligne importe les schéma de donnée Posts
 const Post= require('../models/post');
 
 //Cette ligne importe file system, qui permet de gérer des fichiers (notemment pour la suppression d'images du dossier images)
@@ -93,19 +93,13 @@ exports.likePost= (req, res, next) =>{
     console.log("demande de suppression du post : ", req.params.postId)
     return Post.findOne({ where: {postId: req.params.postId }}) //on cherche l'objet dans la base de données
     .then( post => {
-      if(post.userId != req.params.userId)
-        {
-          res.status(500).json({message:"l'utilisateur n'a pas l'autorisation de supprimer ce post"})
-        }
         /*
         const filename = post.imageUrl.split('/images')[1] //filename récupère le nom du fichier à supprimer
         fs.unlink(`images/${filename}`, ()=> { //fs.unlink supprime le fichier image, puis le callback supprime l'objet, à intégrer une fois qu'on pourra envoyer des fichiers images
         */
-       else{
           post.destroy({ where: {postId: req.params.postId }})
           .then(() => res.status(200).json({ message: 'post supprimé'}))
           .catch(error => res.status(404).json({error}));
-            }
         /*}) La fonction de suppression de l'image sera à gérer une fois l'envoie d'objet côte front implémenté*/
     })
     .catch(error => res.status(500).json({error}));
@@ -117,7 +111,7 @@ exports.likePost= (req, res, next) =>{
 exports.getOnePost = (req, res, next) =>{
     Post.findOne({ where: {postId: req.params.postId }}) //_id est le champs de l'objet thing évalué, req.params.id est la valeur recherchée passée par la requête HTTP (:id). On va donc regarder tous les objets dans la BDD et chercher celui qui a le bon ID.
     .then(post => res.status(200).json(post))
-    .catch(error => res.status(404).json({error}));
+    .catch(error => res.status(404).json({"message":error}));
   };
 
 // Fonction de récupération de tous les posts d'un utilisateur
@@ -133,3 +127,25 @@ exports.getAllPosts = (req, res, next) => {
     .then(posts => res.status(200).json(posts)) 
     .catch(error => res.status(400).json({error}));
     }
+
+exports.flag = (req,res,next) =>{
+  console.log("demande de signalement du post :", req.params.postId)
+  Post.findOne({ where: {postId: req.params.postId }})
+  .then(post => {
+    post.flagged = true;
+    post.save();
+    res.status(201).json({"message":"post "+ req.params.postId +" flagged"})
+  })
+  .catch(error => res.status(404).json({"message":error}));
+}
+
+exports.unflag = (req,res,next) =>{
+  console.log("demande de désignalement du post :", req.params.postId)
+  Post.findOne({ where: {postId: req.params.postId }})
+  .then(post => {
+    post.flagged = false;
+    post.save();
+    res.status(201).json({"message":"post "+ req.params.postId +" unflagged"})
+  })
+  .catch(error => res.status(404).json({"message":error}));
+}
