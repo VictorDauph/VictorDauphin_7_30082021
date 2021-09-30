@@ -5,7 +5,7 @@ const Post= require('../models/post');
 const fs = require('fs');
 
 
-//cette fonction sert à liker et disliker les sauces
+//cette fonction sert à liker et disliker les posts
 exports.likePost= (req, res, next) =>{
   const userId= req.body.userId;
   const postId= req.params.postId;

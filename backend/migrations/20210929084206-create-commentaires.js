@@ -24,6 +24,14 @@ module.exports = {
     type: Sequelize.BOOLEAN,
     defaultValue:false 
   },
+  createdAt: {
+    type: Sequelize.DATE,
+    allowNull:false, 
+  },
+updatedAt: {
+  type: Sequelize.DATE,
+  allowNull:false, 
+  },
 
   },);
   await queryInterface.addConstraint('comments',
