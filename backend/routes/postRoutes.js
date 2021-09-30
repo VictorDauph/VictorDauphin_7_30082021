@@ -45,7 +45,11 @@ router.get('/fromUser/:userId', auth, postCtrl.getPostsFromUser);
 // Cette route permet de signaler le post d'un utilisateur
 router.put('/flag/:postId', auth, postCtrl.flag);
 
-// Cette route permet de signaler le post d'un utilisateur
-router.put('/unflag/:postId',auth, adminAuth, postCtrl.unflag); //, postCtrl.unflag
+// Cette route permet de désignaler le post d'un utilisateur
+router.put('/unflag/:postId',auth, adminAuth, postCtrl.unflag);
+
+//Fetch tous les posts signalés pour besoins de modération
+router.get("/flagged",auth,adminAuth,postCtrl.getFlaggedPosts)
+
 
 module.exports = router;

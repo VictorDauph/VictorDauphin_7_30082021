@@ -128,6 +128,7 @@ exports.getAllPosts = (req, res, next) => {
     .catch(error => res.status(400).json({error}));
     }
 
+//Fonction de signalement d'un post
 exports.flag = (req,res,next) =>{
   console.log("demande de signalement du post :", req.params.postId)
   Post.findOne({ where: {postId: req.params.postId }})
@@ -139,6 +140,7 @@ exports.flag = (req,res,next) =>{
   .catch(error => res.status(404).json({"message":error}));
 }
 
+//Fonction de désignalement d'un post
 exports.unflag = (req,res,next) =>{
   console.log("demande de désignalement du post :", req.params.postId)
   Post.findOne({ where: {postId: req.params.postId }})
@@ -149,3 +151,10 @@ exports.unflag = (req,res,next) =>{
   })
   .catch(error => res.status(404).json({"message":error}));
 }
+
+// Fonction de récupération des posts signalés
+exports.getFlaggedPosts = (req, res, next) =>{
+  Post.findAll({ where: {flagged:true }}) //Chercher tous les comments flaggés
+  .then(posts => res.status(200).json(posts))
+  .catch(error => res.status(404).json({message:error}));
+};
