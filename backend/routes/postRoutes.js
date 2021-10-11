@@ -28,7 +28,7 @@ const multer = require('../middleware/multer-config')
 router.post('/:postId/like',auth,postCtrl.likePost);
 
 //Ce middleware créé une route POST pour ajouter des posts. Il utilise le schéma de données Post comme une classe et le contenu de la requête pour créer une instance de Post.
-router.post('/', auth, multer, postCtrl.createPost);
+router.post('/', auth, multer, /* postCtrl.createPost */);
 
 //route delete pour suppression d'un post
 router.delete('/:postId/:userId',auth,checkUser,checkPostsRights,postCtrl.deletePost );

@@ -79,7 +79,7 @@ exports.likePost= (req, res, next) =>{
     console.log("création du post", postObject)
     const post = new Post ({
       ...postObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet Post et des données contenues dans la requête.
-      //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, //sert à créer une URL selon les méthodes propres à Multer, désactiver pour des tests avec Postman, activer pour la gestion d'images
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, //sert à créer une URL selon les méthodes propres à Multer, désactiver pour des tests avec Postman, activer pour la gestion d'images
       usersLiked : [],
       usersdisLiked : []
     });
