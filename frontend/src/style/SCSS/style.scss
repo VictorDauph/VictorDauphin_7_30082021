@@ -1,0 +1,16 @@
+/* 
+Application mise en forme avec bootstrap, le code Scss ne sert qu'à personnaliser le thème bootstrap et apporter quelques animations.
+
+Lancers Sass : 
+sass --watch frontend/src/style/SCSS/style.scss:frontend/src/style/CSS/style.css 
+*/
+
+@import "variables_overrides";
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+i
+{
+    font-size: 1.4em;
+}
+
+
