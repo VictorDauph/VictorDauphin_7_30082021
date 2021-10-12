@@ -32,8 +32,8 @@ exports.signup = (req, res, next) => {
                     password: hash
                 });
                 user.save()
-                .then(() => res.status(201).json({message: 'utilisateur créé'}))
-                .catch(error => res.status(400).json({message:"echec de la éation de l'utilisateur" ,error}));
+                .then(() => res.status(201).json({message: 'utilisateur créé',success:true}))
+                .catch(error => res.status(400).json({message:"echec de la création de l'utilisateur",success:false ,error}));
             })
             .catch(error => res.status(500).json({error}));
         }
@@ -52,13 +52,13 @@ exports.login = (req, res, next) => {
     return User.findOne({where:{email: bodyEmail}})
     .then(user => {
             if(!user) {
-                return res.status(401).json({ error: 'Utilisateur non trouvé'});
+                return res.status(401).json({ message: 'Utilisateur non trouvé'});
             }
             bcrypt.compare(req.body.password, user.password)
             .then( valid => {
                 console.log("userId sending: ", user.userId)
                 if (!valid) {
-                    return res.status(401).json({ error: 'Mot de pass invalide'})
+                    return res.status(401).json({ message: 'Mot de pass invalide'})
                 }
                 res.status(200).json({
                     userId: user.userId,
