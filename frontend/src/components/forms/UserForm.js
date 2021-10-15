@@ -1,7 +1,10 @@
+//userForm est un composant modulable utilisé pour le login et pour le signup. Par conséquent le text du bouton, les fonctions de traitement des données et la redirection sont des props.
+
 //react-bootstrap permet d'utiliser des composant spécifiques pour les Form et les Button
 import {Form, Button} from "react-bootstrap"
 //useRef permet de lire le contenu d'un input.
 import {useRef} from "react"; 
+
 
 function UserForm(props){
     const emailInput = useRef()
@@ -23,6 +26,7 @@ function UserForm(props){
         props.onSubmitUser(newUser)
       };
 
+    //affichage et styles bootstrap du formulaire
     return(
         <Form onSubmit={handleSubmit}>
         <Form.Group className="p-3 mb-5 rounded text-primary bg-secondary" controlId="formBasicEmail">

@@ -7,12 +7,18 @@ import { useHistory } from "react-router-dom";
 //importation des composants utilisés sur cette page
 import Userform from "../components/forms/UserForm";
 
+//importation des éléments liés aux composants contextuels
+import {useContext} from "react";
+import {AuthContext} from "../authentification/authContext"; 
+
 function LoginPage(){
     const title= "Connexion au compte utilisateur"
     const [message, changeMessage] = useState("...")
     const history = useHistory() //history est est utilisée pour la navigation programmatique
+    const AuthCtx = useContext(AuthContext) //Authcontext contient les variables fonctions liées au login, logout et vérification d'authentification pour gérer les Protected Routes
 
     function handleUserLogin(user) {
+        //paramètrage de la requête Post pour le login
         console.log("tentative de login from front", user)
         const requestHeaders = {"Content-Type":"application/json"};
         const requestBody = JSON.stringify({
@@ -26,19 +32,22 @@ function LoginPage(){
             body: requestBody,
             headers: requestHeaders,
         };
+        //requête de login
         fetch("http://localhost:4000/api/account/login",init
         ).then(res => {
             console.log("status pre-json",res.status)
+
+            //fonxtion d'appel du contexte pour gérer le login
             return res.json()}).then(data =>{
+                const redirection = () => {history.push("/feed");}
                 changeMessage(data.message)
                 console.log(data.userId, data.token) //trouver la meilleur façon de stocker le token, avec redux?
-                if(data.token){
-                    history.replace("/feed")
-                }
+                AuthCtx.login(redirection, data.userId, data.token)
             }).catch(err =>{
                 changeMessage(err.message)})
     }; 
 
+    //Gestion de l'affichage, des éléments qui constituent le composant, notemment le formulaire.
     return(
         <div className="container">
             <div className="raw my-3 mx-3">

@@ -7,6 +7,10 @@ import Header from "./components/layout/Header";
 //importation des pages à afficher
 import SignupPage from "./pages/SignupPage"
 import LoginPage from "./pages/LoginPage"
+import Feed from "./pages/Feed";
+
+//importation du composant de protection des routes
+import ProtectedRoute from "./authentification/protectedRoutes";
 
 //function App qui sert à gérer l'affichage des pages, du header et le router
 function App() {
@@ -14,9 +18,9 @@ function App() {
     <div>
       <Header />
         <Switch>
-          <Route path="/" exact> <LoginPage /> </Route>
-          <Route path="/signup" exact> <SignupPage /> </Route>
-          <Route path="/feed" exact> feed </Route>
+          <Route path="/" exact component={LoginPage} />  
+          <Route path="/signup" exact component={SignupPage} />
+          <ProtectedRoute path="/feed" exact component={Feed} />
         </Switch>
     </div>
     );

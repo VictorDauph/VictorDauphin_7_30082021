@@ -10,10 +10,16 @@ import './style/CSS/style.css';
 //chargement du fichier App qui gère le code Javascript et met en place les composants
 import App from './App';
 
+//Il est impératif que le composant du contexte englobe l'entièreté du projet pour pouvoir être pris en compte à n'importe quel niveau.
+import {AuthContextProvider} from "./authentification/authContext"
+
+
 ReactDOM.render(
-      <BrowserRouter>
-      <App />
-    </ BrowserRouter>,
+  <AuthContextProvider>
+        <BrowserRouter>
+          <App />
+      </ BrowserRouter>
+  </AuthContextProvider>,
   document.getElementById('root')
 );
 
