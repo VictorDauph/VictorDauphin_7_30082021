@@ -8,12 +8,11 @@ export const AuthContext = createContext({});
 
 
 export function AuthContextProvider(props){
-    const [userAuth, setUserAuth] = useState(false)
+    let userAuth = false
 
         function loginHandler(redirection,userId, token){ //en argument de login on passe une fonction de redirection qui doit être éxécutée une fois l'authentification réalisée.
             console.log("demande d'authentification")
             const userDatas = {id:userId,token:token}
-            setUserAuth(true)
             localStorage.setItem("userDatas", JSON.stringify(userDatas))
             console.log("stored userDatas", localStorage.getItem("userDatas"))
             redirection()
@@ -22,12 +21,25 @@ export function AuthContextProvider(props){
 
         function logoutHandler(redirection){
             console.log("logging out")
-            setUserAuth(false);
             localStorage.removeItem("userDatas")
             redirection();
         }
 
+        function checkLocalStorage(userDatas)
+        {
+                if (userDatas !==null){
+                    console.log("setting true")
+                    return true
+                }
+                else{
+                    console.log("setting false")
+                    return false
+                }
+        }
+
         function isAuthenticatedHandler(){
+            const userDatas = localStorage.getItem("userDatas")
+            userAuth = checkLocalStorage(userDatas)
             return userAuth;
         }
 
