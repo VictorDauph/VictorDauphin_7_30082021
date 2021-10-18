@@ -39,7 +39,7 @@ export function AuthContextProvider(props){
 
         function isAuthenticatedHandler(){
             const userDatas = localStorage.getItem("userDatas")
-            userAuth = checkLocalStorage(userDatas)
+            userAuth = checkLocalStorage(userDatas) //l'utilisateur est considéré comme authentifié sur userDatas est présent dans le LocalStorage
             return userAuth;
         }
 

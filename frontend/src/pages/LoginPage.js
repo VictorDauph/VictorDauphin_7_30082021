@@ -11,7 +11,10 @@ import Userform from "../components/forms/UserForm";
 import {useContext} from "react";
 import {AuthContext} from "../authentification/authContext"; 
 
-function LoginPage(){
+//importation header
+import Header from "../components/layout/Header";
+
+function LoginPage(props){
     const title= "Connexion au compte utilisateur"
     const [message, changeMessage] = useState("...")
     const history = useHistory() //history est est utilisée pour la navigation programmatique
@@ -49,12 +52,15 @@ function LoginPage(){
 
     //Gestion de l'affichage, des éléments qui constituent le composant, notemment le formulaire.
     return(
-        <div className="container">
-            <div className="raw my-3 mx-3">
-                <h2 className="text-primary col-10">{title}</h2>
+        <div>
+            <Header headerType= "login" />
+            <div className="container">
+                <div className="raw my-3 mx-3">
+                    <h2 className="text-primary col-10">{title}</h2>
+                </div>
+                <Userform onSubmitUser={handleUserLogin} buttonText="connexion" /> {/*  Appelle UserForm et lui indique de s'afficher ici et Rend disponible la fonction handleadd(requête Post à l'API) au sous-fichier user add qui gère le formulaire */}
+                <p className="text-danger my-5">{message}</p>
             </div>
-            <Userform onSubmitUser={handleUserLogin} buttonText="connexion" /> {/*  Appelle UserForm et lui indique de s'afficher ici et Rend disponible la fonction handleadd(requête Post à l'API) au sous-fichier user add qui gère le formulaire */}
-            <p className="text-danger my-5">{message}</p>
         </div>
     );
 }

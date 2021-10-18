@@ -7,6 +7,9 @@ import { useHistory } from "react-router-dom";
 //importation des composants utilisés sur cette page
 import Userform from "../components/forms/UserForm";
 
+//importation Header
+import Header from "../components/layout/Header";
+
 function SignupPage(){
     const title= "Création du compte utilisateur"
     const [message, changeMessage] = useState("...")
@@ -41,14 +44,17 @@ function SignupPage(){
     }; 
 
     return(
-        <div className="container">
-            <div className="raw my-3 mx-3">
-                <h2 className="text-primary col-10">{title}</h2>
+        <div>
+            <Header headerType= "signup" />
+            <div className="container">
+                <div className="raw my-3 mx-3">
+                    <h2 className="text-primary col-10">{title}</h2>
+                </div>
+                <Userform onSubmitUser={handleAddUser} buttonText="Inscription" /> {/*  Appelle UserForm et lui indique de s'afficher ici et Rend disponible la fonction handleadd(requête Post à l'API) au sous-fichier user add qui gère le formulaire */}
+                <p className="text-danger my-5">{message}</p>
             </div>
-            <Userform onSubmitUser={handleAddUser} buttonText="Inscription" /> {/*  Appelle UserForm et lui indique de s'afficher ici et Rend disponible la fonction handleadd(requête Post à l'API) au sous-fichier user add qui gère le formulaire */}
-            <p className="text-danger my-5">{message}</p>
         </div>
-    );
+        );
 }
 
 export default SignupPage
