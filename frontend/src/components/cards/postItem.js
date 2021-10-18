@@ -13,7 +13,7 @@ function PostItem(props) {
                 <Card className="col col-md-6 mx-auto bg-secondary">
                     <Card.Body>
                         <Card.Title className="text-primary"> <h3>{props.title}</h3> </Card.Title>
-                        <Card.Text className="text-primary"> <p>Karma: {karma} <span className="mini"> upVotes:{upVotes} downvotes:{downVotes} </span> </p>
+                        <Card.Text className="text-light"> <p>Karma: {karma} <span className="mini"> upVotes:{upVotes} downvotes:{downVotes} </span> </p>
                         <p className="mini">crée le: {props.CreatedAt} par {user} Commentaires: {commentsNumber} </p></Card.Text>
                     </Card.Body>
                     <Card.Img variant="top" src={`http://localhost:4000/images/${props.imageUrl}`} />
