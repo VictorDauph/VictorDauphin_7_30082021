@@ -1,12 +1,12 @@
-//Ici, on utilise useState pour gérer l'affichage des promesses retournée par fetch via l'API firebase.
-import {useState} from "react"
-
 //importation Header
 import Header from "../components/layout/Header";
-import PostList from "../components/cards/postList"
+import PostListing from "../components/cards/postListing"
 
+//importation du fichier de formattage des données depuis l'API pour les posts
+import allPostsDataFormating from "../components/cards/allPostsDataFormatting";
 
-const allPosts = [
+/*
+const allPostsDummy = [
     {
         postId:1,
         userId:7,
@@ -30,17 +30,16 @@ const allPosts = [
         flagged:0
     },
 ]
+*/
 
-
-
+const allPosts = allPostsDataFormating()
 
 function Feed(){
-    const [message, changeMessage] = useState("...")
-    const defaultImage = "http://localhost:4000/images/defaultImage.png"
+    console.log("allPosts", allPosts)
     return(
     <div>
         <Header headerType = "feed"/>
-        <PostList posts = {allPosts} />
+        <PostListing posts = {allPosts} />
     </div>
     )
 } 
