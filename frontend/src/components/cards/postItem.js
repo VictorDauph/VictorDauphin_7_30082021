@@ -8,7 +8,7 @@ function PostItem(props) {
     const karma= upVotes - downVotes
     const user= "user@email"
     const commentsNumber= "666"
-    console.log("post props", props)
+    console.log("post props", props )
     return (    
         <div className="raw my-3 mx-3">
                 <Card className="col col-md-6 mx-auto bg-secondary">
@@ -22,7 +22,7 @@ function PostItem(props) {
                                 </span> 
                             </p>
                             <p className="mini">
-                                crée le: {props.CreatedAt} par 
+                                crée le: {props.createdAt} par 
                                 <span className="text-primary cursor-pointer">  {user} </span> 
                                 Commentaires: {commentsNumber} 
                             </p>
