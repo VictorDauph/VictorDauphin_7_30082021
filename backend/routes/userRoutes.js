@@ -17,5 +17,6 @@ const checkUser = require("../middleware/checkUser")
 router.post('/signup',userCtrl.signup);
 router.post('/login',userCtrl.login);
 router.delete('/:userId',auth,checkUser, userCtrl.delete);
+router.get("/:userToRetrieve",auth,userCtrl.retrieveUser)
 
 module.exports = router;
