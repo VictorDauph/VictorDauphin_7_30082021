@@ -3,12 +3,13 @@ import {Card} from 'react-bootstrap'
 
 
 function PostItem(props) {
+    console.log("post props", props )
     const upVotes = props.usersUpvotes.length
     const downVotes =  props.usersDownvotes.length
     const karma= upVotes - downVotes
-    const user= "user@email"
+    const user= props.email
     const commentsNumber= "666"
-    console.log("post props", props )
+    
     return (    
         <div className="raw my-3 mx-3">
                 <Card className="col col-md-6 mx-auto bg-secondary">
@@ -23,8 +24,8 @@ function PostItem(props) {
                             </p>
                             <p className="mini">
                                 crée le: {props.createdAt} par 
-                                <span className="text-primary cursor-pointer">  {user} </span> 
-                                Commentaires: {commentsNumber} 
+                                <span className="text-primary cursor-pointer">  {props.userId} </span> 
+                               {/*  Commentaires: {commentsNumber} Une solution simple pour gérer l'affichage des commentaires?*/}
                             </p>
                         </Card.Text>
                     </Card.Body>

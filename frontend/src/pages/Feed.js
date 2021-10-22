@@ -50,7 +50,7 @@ function Feed(){
     return(
     <div>
         <Header headerType = "feed"/>
-        <PostListing posts = {getPostsCtx.loadedPosts} /> 
+        <PostListing posts = {getPostsCtx.loadedPosts} />
     </div>
     )
 } 
