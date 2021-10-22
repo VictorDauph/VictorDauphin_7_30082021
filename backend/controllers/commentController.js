@@ -1,7 +1,7 @@
 //Cette ligne importe les schéma de donnée Posts
 const Comment= require('../models/comment');
 
-//cette fonction sert à créer des posts et est exportée pour le fichier router postRoutes.js
+//cette fonction sert à créer des commentaires.
 exports.createComment = (req, res, next) =>{
     console.log("demande de création de commentaire autorisée")
       const commentObject = req.body;

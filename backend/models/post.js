@@ -17,10 +17,6 @@ module.exports = sequelize.define("Post", { //1er paramètre = nom du modèle, s
         type : Sequelize.STRING(100),
         allowNull:false, 
     },
-    commentsList:{
-        type: Sequelize.JSON,
-        defaultValue:"[]"
-    },
     title: {
         type : Sequelize.STRING(100),
         allowNull:false, 
