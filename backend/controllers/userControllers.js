@@ -62,6 +62,7 @@ exports.login = (req, res, next) => {
                 }
                 res.status(200).json({
                     userId: user.userId,
+                    role:user.role,
                     token: jwt.sign(
                         { 
                             userId:user.userId, //permet d'encoder l'information du user Id dans le token. Ce qui permettra de vérifier le user ID à la modification d'objets.
