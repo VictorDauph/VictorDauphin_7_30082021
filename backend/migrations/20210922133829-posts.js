@@ -10,9 +10,13 @@ module.exports = {
           primaryKey: true,
       },
       userId: { //On peut spécifier tous les attributs de la colonne id:
-          type: Sequelize.INTEGER(11),
+        type: Sequelize.STRING(100),
           allowNull:false,
       },
+      commentsList:{
+        type: Sequelize.JSON,
+        defaultValue:"[]"
+    },
       title: {
           type : Sequelize.STRING(100),
           allowNull:false, 

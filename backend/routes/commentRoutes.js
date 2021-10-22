@@ -21,16 +21,16 @@ const checkCommentsRights=require("../middleware/checkCommentsRights")
 router.post('/',auth,commentCtrl.createComment);
 
 //Suppression commentaire
-router.delete('/:userId/:commentId',auth,checkUser,checkCommentsRights,commentCtrl.deleteComment);
+router.delete('/:commentId',auth,checkUser,checkCommentsRights,commentCtrl.deleteComment);
 
 //Modification commentaire
-router.put('/:userId/:commentId',auth,checkUser,checkCommentsRights,commentCtrl.modifyComment);
+router.put('/:commentId',auth,checkUser,checkCommentsRights,commentCtrl.modifyComment);
 
 // Cette route permet de signaler un commentaire
-router.put('/flag/:userId/:commentId', auth, commentCtrl.flag);
+router.put('/flag/:commentId', auth, commentCtrl.flag);
 
 // Cette route permet de désignaler un commentaire
-router.put('/unflag/:userId/:commentId',auth, adminAuth, commentCtrl.unflag); 
+router.put('/unflag/:commentId',auth, adminAuth, commentCtrl.unflag); 
 
 //Cette route permet de récupérer tous les commentaires liés à un post
 router.get("/getFrom/:postId",auth,commentCtrl.getCommentsFromPost)

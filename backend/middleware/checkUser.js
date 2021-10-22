@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
         const userId = decodedToken.userId;
         const role = decodedToken.role;
         console.log("token user ID: ", userId, "http request id: ", req.params.userId, "role :",role )
-        if (req.params.userId != userId && role !=admin){ // Si l'userId passé par la requête http est différent de celui contenu dans le token
+        if (req.body.userId != userId && role !=admin){ // Si l'userId passé par la requête http est différent de celui contenu dans le token
             throw 'Action non autorisée pour cet utilisateur';
         } else if (role === "admin") {
             console.log("autorisation administrateur")

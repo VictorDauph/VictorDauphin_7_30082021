@@ -7,16 +7,11 @@ const sequelize = require("../database/connection");
 // .define est la méthode pour créer un modèle
 module.exports = sequelize.define("User", { //1er paramètre = nom du modèle, second paramètre = données du schéma
 
-    userId: { //On peut spécifier tous les attributs de la colonne id:
-        type: Sequelize.INTEGER(11),
-        allowNull:false,
-        autoIncrement: true,
-        primaryKey: true,
-    },
-    email: {
-        type : Sequelize.STRING(35),
+    userId: { //userId est l'email de l'utilisateur
+        type : Sequelize.STRING(100),
+        unique: true,
         allowNull:false, 
-        unique: true
+        primaryKey: true,
     },
     password: {
         type : Sequelize.STRING(60),

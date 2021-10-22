@@ -16,7 +16,7 @@ const checkUser = require("../middleware/checkUser")
 //on utilise des routes post car les requêtes doivent contenir des informations: email et mdp 
 router.post('/signup',userCtrl.signup);
 router.post('/login',userCtrl.login);
-router.delete('/:userId',auth,checkUser, userCtrl.delete);
+router.delete('/',auth,checkUser, userCtrl.delete);
 router.get("/:userToRetrieve",auth,userCtrl.retrieveUser)
 
 module.exports = router;

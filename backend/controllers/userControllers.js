@@ -28,7 +28,7 @@ exports.signup = (req, res, next) => {
             bcrypt.hash(req.body.password, 10) //méthode asynchrone de cryptage du mot de passe
             .then( hash => {
                 const user = new User ({ //User est le schéma de données créé dans userModels, hash est le hash du mot de passe crée et crypté
-                    email:req.body.email,
+                    userId:req.body.email,
                     password: hash
                 });
                 user.save()
@@ -49,7 +49,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
     const bodyEmail = req.body.email
     console.log("demande de login",bodyEmail,req.body.password)
-    return User.findOne({where:{email: bodyEmail}})
+    return User.findOne({where:{userId: bodyEmail}})
     .then(user => {
             if(!user) {
                 return res.status(401).json({ message: 'Utilisateur non trouvé'});
@@ -80,10 +80,10 @@ exports.login = (req, res, next) => {
 //fonction de suppression utilisateur.
 exports.delete = (req, res, next) =>{
     console.log("authorized delete request")
-    User.findOne({where: {userId: req.params.userId}})
+    User.findOne({where: {userId: req.body.userId}})
     .then( user => { 
         user.destroy({
-            where: {userId: req.params.userId}
+            where: {userId: req.body.userId}
             })
         .then(() => res.status(200).json({ message: 'Utilisateur supprimé'}))
         .catch(error => res.status(404).json({message:error}));

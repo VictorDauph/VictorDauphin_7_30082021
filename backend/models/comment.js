@@ -12,10 +12,10 @@ module.exports = sequelize.define("Comment", {
     autoIncrement: true,
     primaryKey: true,
 },
-userId: { //On peut spécifier tous les attributs de la colonne id:
-  type: Sequelize.INTEGER(11),
-  allowNull:false,
-},
+userId: { //userId est l'email de l'utilisateur
+  type : Sequelize.STRING(100),
+  allowNull:false, 
+}, 
 postId: { //On peut spécifier tous les attributs de la colonne id:
   type: Sequelize.INTEGER(11),
   allowNull:false,

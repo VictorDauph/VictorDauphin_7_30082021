@@ -13,9 +13,13 @@ module.exports = sequelize.define("Post", { //1er paramètre = nom du modèle, s
         autoIncrement: true,
         primaryKey: true,
     },
-    userId: { //On peut spécifier tous les attributs de la colonne id:
-        type: Sequelize.INTEGER(11),
-        allowNull:false,
+    userId: { //userId est l'email de l'utilisateur
+        type : Sequelize.STRING(100),
+        allowNull:false, 
+    },
+    commentsList:{
+        type: Sequelize.JSON,
+        defaultValue:"[]"
     },
     title: {
         type : Sequelize.STRING(100),
