@@ -66,7 +66,7 @@ function PostItem(props) {
                                 <span className="mini"> 
                                     <span className="text-primary arrow cursor-pointer mx-1"> <i className="fas fa-thumbs-up"></i> </span> {upVotes} 
                                     <span className="text-primary cursor-pointer mx-1"> <i className="fas fa-thumbs-down"></i> </span> {downVotes} 
-                                    <span className="text-danger mx-1"> {flagged? isAdmin? <i className="fas fa-flag cursor-pointer" onClick={setUnflaggedHandler}> désignaler le contenu </i> : <i className="fas fa-flag"> contenu signalé</i> : <i class="far fa-flag cursor-pointer" onClick={setFlaggedHandler}> signaler ce contenu</i>} </span>
+                                    <span className="text-danger mx-1"> {flagged? isAdmin? <i className="fas fa-flag cursor-pointer text-primary" onClick={setUnflaggedHandler}> Contenu acceptable </i> : <i className="fas fa-flag"> contenu signalé</i> : <i class="far fa-flag cursor-pointer" onClick={setFlaggedHandler}> signaler ce contenu</i>} </span>
                                 </span> 
                             </p>
                             <p className="mini">
