@@ -44,8 +44,8 @@ function LoginPage(props){
             return res.json()}).then(data =>{
                 const redirection = () => {history.push("/feed");}
                 changeMessage(data.message)
-                console.log(data.userId, data.token) //trouver la meilleur façon de stocker le token, avec redux?
-                AuthCtx.login(redirection, data.userId, data.token)
+                console.log(data.userId, data.token)
+                AuthCtx.login(redirection, data.userId,data.role, data.token)
             }).catch(err =>{
                 changeMessage(err.message)})
     }; 

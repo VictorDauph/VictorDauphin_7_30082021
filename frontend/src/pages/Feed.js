@@ -41,11 +41,12 @@ function Feed(){
 
     //allPosts Dummy est un array de faux posts codé en dur pour les tests d'affichage des composants.
     //const allPosts = allPostsDummy
-
+    
     useEffect(()=> { //useEffect évite une boucle infinie qui pousse le composant à se recharger à fois qu'il appelle fetch.
         getPostsCtx.getPosts("http://localhost:4000/api/post")
       }, []); //[] est vide car il n'ya pas d'external dependencie dans la fonction gérée par useEffect. S'il y'en avait eu, il aurait fallu les inclure dans l'array.
     console.log("loadedPosts", getPostsCtx.loadedPosts)
+    
 
     return(
     <div>
