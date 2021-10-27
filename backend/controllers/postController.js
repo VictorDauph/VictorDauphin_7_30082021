@@ -27,7 +27,7 @@ exports.likePost= (req, res, next) =>{
           {where : {postId:postId}}
           ) 
         .then(()=> res.status(200).json({message: 'post liké'}))
-        .catch(error => res.status(400).json({error}));
+        .catch(error => res.status(400).json({message:error}));
       }
     else if (likevalue == 0 && (newUsersDisliked.includes(userId) || newUsersLiked.includes(userId)) )
       {
@@ -52,7 +52,7 @@ exports.likePost= (req, res, next) =>{
         {where : {postId:postId}}
         )
         .then(()=> res.status(200).json({message: 'like/dislike supprimé'}))
-        .catch(error => res.status(400).json({error})); 
+        .catch(error => res.status(400).json({message:error})); 
       }
       else if (likevalue == -1 && newUsersDisliked.includes(userId)==false && newUsersLiked.includes(userId)==false)
       {
@@ -64,11 +64,11 @@ exports.likePost= (req, res, next) =>{
           {where : {postId:postId}}
           ) 
         .then(()=> res.status(200).json({message: 'post disliké'}))
-        .catch(error => res.status(400).json({error}));
+        .catch(error => res.status(400).json({message:error}));
       }
       else{res.status(400).json({message:"valeur de like non acceptée"})}
   })
-  .catch(error => res.status(500).json({error}));
+  .catch(error => res.status(500).json({message:error}));
 } 
 
 
