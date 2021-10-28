@@ -6,6 +6,7 @@ import SignupPage from "./pages/SignupPage"
 import LoginPage from "./pages/LoginPage"
 import Feed from "./pages/Feed";
 import NewPost from "./pages/newPost";
+import MyFeed from "./pages/myFeed";
 
 //importation du composant de protection des routes
 import ProtectedRoute from "./authentification/protectedRoutes";
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" exact component={SignupPage} headerType="logout" />
           <ProtectedRoute path="/feed" exact component={Feed} headerType="feed" />
           <ProtectedRoute path="/newPost" exact component={NewPost} headerType="feed" />
+          <ProtectedRoute path="/myFeed" exact component={MyFeed} headerType="myFeed" />
         </Switch>
     </div>
     );

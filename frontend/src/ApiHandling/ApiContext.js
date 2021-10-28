@@ -38,7 +38,6 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
                     fetch(getUri, init).then(res => res.json()).then(
                         posts => {
                             posts.map(
-                                //reste à gérer les emails et les listes de commentaires
                                 post =>{
                                         const formatedPost = {
                                             ...post,

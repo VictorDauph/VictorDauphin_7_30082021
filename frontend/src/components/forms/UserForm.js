@@ -29,19 +29,19 @@ function UserForm(props){
     //affichage et styles bootstrap du formulaire
     return(
         <Form onSubmit={handleSubmit}>
-        <Form.Group className="p-3 mb-5 rounded text-primary bg-secondary" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="entrez votre email" ref={emailInput} />
-        </Form.Group>
+            <Form.Group className="p-3 mb-5 rounded text-primary bg-secondary" controlId="formBasicEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" placeholder="entrez votre email" ref={emailInput} />
+            </Form.Group>
 
-        <Form.Group className="p-3 mb-5 rounded text-primary bg-secondary" controlId="formBasicPassword">
-        <Form.Label>Mot de Passe</Form.Label>
-            <Form.Control type="password" placeholder="entrez votre mot de passe" ref={passwordInput} />
-        </Form.Group>
+            <Form.Group className="p-3 mb-5 rounded text-primary bg-secondary" controlId="formBasicPassword">
+            <Form.Label>Mot de Passe</Form.Label>
+                <Form.Control type="password" placeholder="entrez votre mot de passe" ref={passwordInput} />
+            </Form.Group>
 
-        <Button className="text-primary bg-secondary border-0" type="submit">
-            {buttonText}
-        </Button>
+            <Button className="text-primary bg-secondary border-0" type="submit">
+                {buttonText}
+            </Button>
         </Form>
     );
 }
