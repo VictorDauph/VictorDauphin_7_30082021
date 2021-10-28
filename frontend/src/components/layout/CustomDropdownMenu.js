@@ -67,7 +67,7 @@ function CustomDropdownMenu(props){
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="bg-secondary">
                     <Dropdown.Item>
-                        <Link className="text-decoration-none">Créer Post</Link>
+                        <Link className="text-decoration-none" to="/newPost">Créer Post</Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
                         <Link className="text-decoration-none" /*to="/" */ >Mon Fil</Link>
@@ -83,6 +83,31 @@ function CustomDropdownMenu(props){
             </Dropdown> 
                 )
             }
+            else if (props.headerType=="newPost"){
+                //Menu dropdown page feed  
+                return(
+                    <Dropdown>
+                    <Dropdown.Toggle className="btn btn-secondary dropdown-toggle">
+                        <i className="fas fa-bars"></i> 
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="bg-secondary">
+                        <Dropdown.Item>
+                            <Link className="text-decoration-none" to="/feed">Fil</Link>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <Link className="text-decoration-none" /*to="/" */ >Mon Fil</Link>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <p className="text-decoration-none text-primary" onClick={logoutHandler} >Logout</p>
+                        </Dropdown.Item>                    
+                        <Dropdown.Item>
+                            <Link className="text-decoration-none text-danger" /*to="/" */ >Supprimer compte</Link>
+                        </Dropdown.Item>
+                        
+                    </Dropdown.Menu>
+                </Dropdown> 
+                    )
+                }
     
     else{
         return(

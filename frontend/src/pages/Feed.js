@@ -9,32 +9,6 @@ import ApiContext from "../ApiHandling/ApiContext";
 
 import {useEffect } from "react";
 
-//faux posts pour tests d'affichage
-const allPostsDummy = [
-    {
-        postId:1,
-        userId:7,
-        title: "Post Dummy 1",
-        imageUrl:"defaultImage.png",
-        usersUpvotes:[8],
-        usersDownvotes:[2,3],
-        CreatedAt: "2021-09-29 13:16:50",
-        updatedAt: "2021-10-18 15:51:5",
-        flagged:0
-    },
-    {
-        postId:2,
-        userId:6,
-        title: "Post Dummy 2",
-        imageUrl:"defaultImage.png",
-        usersUpvotes:[6,8],
-        usersDownvotes:[2],
-        CreatedAt: "2021-09-29 13:16:50",
-        updatedAt: "2021-10-18 15:51:5",
-        flagged:0
-    },
-]
-
 function Feed(){
       //On utilise le contexte pour pouvoir écrire la fonction fetch dans un autre fichier, ce qui permet de mieux ranger et aussi de créer une fonction fetch get réutilisable en fonction de l'URI fournie.
     const getPostsCtx = useContext(ApiContext)    

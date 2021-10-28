@@ -54,13 +54,13 @@ function LoginPage(props){
     return(
         <div>
             <Header headerType= "login" />
-            <div className="container">
+            <main className="container">
                 <div className="raw my-3 mx-3">
                     <h2 className="text-primary col-10">{title}</h2>
                 </div>
                 <Userform onSubmitUser={handleUserLogin} buttonText="connexion" /> {/*  Appelle UserForm et lui indique de s'afficher ici et Rend disponible la fonction handleadd(requête Post à l'API) au sous-fichier user add qui gère le formulaire */}
                 <p className="text-danger my-5">{message}</p>
-            </div>
+            </main>
         </div>
     );
 }

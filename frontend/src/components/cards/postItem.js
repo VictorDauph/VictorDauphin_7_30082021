@@ -4,6 +4,9 @@ import {useContext, useState, useEffect } from "react";
 //Ce fichier sert à afficher un seul post sous forme de carte.
 import {Card} from 'react-bootstrap'
 
+//Le composant link remplace les balises <a> en React pour la navigation. En effet les <a> sont des liens qui font charger des pages, et en React on ne navigue pas de page en page, mais on modifie la page de manière dynamique avec des routes. Les links servent à gérer les routes sans envoyer de requêtes http.
+import {Link} from "react-router-dom";
+
 //importaion du contexte d'authentification
 import {AuthContext} from "../../authentification/authContext";
 
@@ -81,7 +84,7 @@ function PostItem(props) {
         <div className="raw my-3 mx-3">
                 <Card className="col col-md-6 mx-auto bg-secondary">
                     <Card.Body>
-                        <Card.Title className="text-primary cursor-pointer"> <h3>{props.title} </h3> </Card.Title>
+                        <Link className="text-decoration-none" to="/post"><Card.Title className="text-primary cursor-pointer" > <h3>{props.title} </h3> </Card.Title></Link>
                         <Card.Text className="text-light"> 
                             <p>Karma: {karma} 
                                 <span className="mini"> {/*Pouce levé blanc si post liké, pouce baissé blanc si post disliké, sinon pouces bleus */}
@@ -91,7 +94,7 @@ function PostItem(props) {
                             </p>
                             <p className="mini">
                                 crée le: {props.createdAt} par 
-                                <span className="text-primary cursor-pointer">  {props.userId} </span> 
+                                <Link className="text-decoration-none" to="/user"><span className="text-primary cursor-pointer">  {props.userId} </span> </Link>
                             </p>
                         </Card.Text>
                     </Card.Body>

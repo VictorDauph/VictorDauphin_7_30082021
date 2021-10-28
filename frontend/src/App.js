@@ -5,6 +5,7 @@ import {Route, Switch} from "react-router-dom"; //Route est l'élément qui gèr
 import SignupPage from "./pages/SignupPage"
 import LoginPage from "./pages/LoginPage"
 import Feed from "./pages/Feed";
+import NewPost from "./pages/newPost";
 
 //importation du composant de protection des routes
 import ProtectedRoute from "./authentification/protectedRoutes";
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" exact component={LoginPage} />  
           <Route path="/signup" exact component={SignupPage} headerType="logout" />
           <ProtectedRoute path="/feed" exact component={Feed} headerType="feed" />
+          <ProtectedRoute path="/newPost" exact component={NewPost} headerType="feed" />
         </Switch>
     </div>
     );
