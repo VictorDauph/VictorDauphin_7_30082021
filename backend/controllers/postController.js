@@ -28,7 +28,7 @@ exports.likePost= (req, res, next) =>{
           {where : {postId:postId}}
           ) 
         .then(()=> res.status(200).json({message: 'post liké'}))
-        .catch(error => res.status(400).json({message:error}));
+        .catch(error => res.status(400).json({message:"echec like"}));
       }
     else if (likevalue == 0 && (newUsersDisliked.includes(userId) || newUsersLiked.includes(userId)) )
       {
@@ -69,7 +69,7 @@ exports.likePost= (req, res, next) =>{
       }
       else{res.status(400).json({message:"valeur de like non acceptée"})}
   })
-  .catch(error => res.status(500).json({message:error}));
+  .catch(error => res.status(500).json({message:"echec like/dislike, post introuvable"}));
 } 
 
 
