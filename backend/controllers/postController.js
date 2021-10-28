@@ -117,7 +117,7 @@ exports.getOnePost = (req, res, next) =>{
 
 // Fonction de récupération de tous les posts d'un utilisateur
 exports.getPostsFromUser = (req, res, next) =>{
-  Post.findAll({ where: {userId: req.body.GetFromUserId }}) //_id est le champs de l'objet thing évalué, req.params.id est la valeur recherchée passée par la requête HTTP (:id). On va donc regarder tous les objets dans la BDD et chercher celui qui a le bon ID.
+  Post.findAll({ where: {userId: req.params.GetFromUserId }}) //_id est le champs de l'objet thing évalué, req.params.id est la valeur recherchée passée par la requête HTTP (:id). On va donc regarder tous les objets dans la BDD et chercher celui qui a le bon ID.
   .then(posts => res.status(200).json(posts))
   .catch(error => res.status(404).json({error}));
 };

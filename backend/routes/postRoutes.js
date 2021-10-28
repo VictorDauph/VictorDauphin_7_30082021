@@ -40,7 +40,7 @@ router.get('/', auth, postCtrl.getAllPosts);
 router.get('/single/:postId', auth, postCtrl.getOnePost);
 
 // Cette route va chercher tous les posts d'un utilisateur
-router.get('/fromUser/', auth, postCtrl.getPostsFromUser);
+router.get('/fromUser/:GetFromUserId', auth, postCtrl.getPostsFromUser);
 
 // Cette route permet de signaler le post d'un utilisateur
 router.put('/flag/:postId', auth, postCtrl.flag);
