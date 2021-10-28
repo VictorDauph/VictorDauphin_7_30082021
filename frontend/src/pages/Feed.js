@@ -25,7 +25,7 @@ function Feed(){
     return(
     <div>
         <Header headerType = "feed"/>
-        <PostListing posts = {ApiCtx.loadedPosts} />
+        <PostListing posts = {ApiCtx.loadedPosts} title={"Fil global"} />
     </div>
     )
 } 

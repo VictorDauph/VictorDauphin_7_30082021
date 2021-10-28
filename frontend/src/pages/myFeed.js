@@ -30,7 +30,7 @@ function MyFeed(){
     return(
     <div>
         <Header headerType = "myFeed"/>
-        <PostListing posts = {ApiCtx.loadedPosts} />
+        <PostListing posts = {ApiCtx.loadedPosts} title={"Mon fil personnel"} />
     </div>
     )
 } 
