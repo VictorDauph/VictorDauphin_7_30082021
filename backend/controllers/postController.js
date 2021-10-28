@@ -138,7 +138,7 @@ exports.flag = (req,res,next) =>{
     post.save();
     res.status(201).json({"message":"post "+ req.params.postId +" flagged"})
   })
-  .catch(error => res.status(404).json({"message":error}));
+  .catch(error => res.status(404).json({"message":"post introuvable"}));
 }
 
 //Fonction de désignalement d'un post
@@ -150,7 +150,7 @@ exports.unflag = (req,res,next) =>{
     post.save();
     res.status(201).json({"message":"post "+ req.params.postId +" unflagged"})
   })
-  .catch(error => res.status(404).json({"message":error}));
+  .catch(error => res.status(404).json({"message":"post introuvable"}));
 }
 
 // Fonction de récupération des posts signalés
