@@ -9,6 +9,8 @@ import ApiContext from "../../ApiHandling/ApiContext"
 
 function LikeInterface(props){
     console.log("like Interface props :", props)
+    //changeMessage est la fonction qui permet d'afficher les messages d'erreurs
+    const changeMessage = props.changeMessage
 
     //importation de contexte d'authentification pour stockage données utilisateur
     const AuthCtx = useContext(AuthContext)
@@ -23,7 +25,7 @@ function LikeInterface(props){
     let authentifiedUserId = null
     AuthCtx.authentifiedUserDatas().then( datas=>{
        authentifiedUserId = datas.id
-    })
+    }).catch(err=>{changeMessage(err.message)})
    
 
     //hasUserLikedPost() est une fonction qui doit retourner 0 si l'utilisateur est neutre, 1 s'il a liké le post, -1 s'il l'a disliké.
@@ -60,31 +62,40 @@ function LikeInterface(props){
     function likePostHandler(){
         console.log("liking post")
         //requête POST pour ajout de like à la BDD
-        ApiCtx.likePost(1,props.postId,authentifiedUserId)
-            //modification du pouce
-            isLiked = 1
-            setUserHasLikedPost(isLiked)
-            //modification du nombre de likes
-            usersUpvotesProps.push(authentifiedUserId)
-            setUsersUpvotes(usersUpvotesProps)
+        ApiCtx.likePost(1,props.postId,authentifiedUserId).then((data)=>{
+                    //modification du pouce
+                    isLiked = 1
+                    setUserHasLikedPost(isLiked)
+                    //modification du nombre de likes
+                    usersUpvotesProps.push(authentifiedUserId)
+                    setUsersUpvotes(usersUpvotesProps)
+                    changeMessage(data.message)
+        }).catch( err=>{
+            changeMessage(err.message)
+        })
     }
+
 
         function dislikePostHandler(){
         console.log("disliking post")
         //requête POST pour ajout de dislike à la BDD
-        ApiCtx.likePost(-1,props.postId,authentifiedUserId)
+        ApiCtx.likePost(-1,props.postId,authentifiedUserId).then((data)=>{
             //modification du pouce
             isLiked = -1
             setUserHasLikedPost(isLiked)
             //modification du nombre de likes
             usersDownvotesProps.push(authentifiedUserId)
             setUsersUpvotes(usersDownvotesProps)
+            changeMessage(data.message)
+        }).catch( err=>{
+            changeMessage(err.message)
+        })
     }
 
     function unlikePostHandler(){//enlever un like ou un dislike nécessite la même requête fetch avec une valeure de like nulle.
         console.log("unliking post")
         //requête POST pour retrait de like/dislike à la BDD
-        ApiCtx.likePost(0,props.postId,authentifiedUserId)
+        ApiCtx.likePost(0,props.postId,authentifiedUserId).then((data)=>{
             //modification du pouce
             isLiked = 0
             setUserHasLikedPost(isLiked)
@@ -102,6 +113,10 @@ function LikeInterface(props){
             //Une fois l'utilisateur supprimé on met à jour les states.
             setUsersUpvotes(usersDownvotesProps)
             setUsersDownvotes(usersDownvotesProps)
+            changeMessage(data.message)
+        }).catch( err=>{
+            changeMessage(err.message)
+        })
     }
 
     useEffect(()=>{

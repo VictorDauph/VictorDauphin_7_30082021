@@ -58,15 +58,23 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
 
     //fonction qui permet de liker 1, unliker 0 et disliker -1 un post.
     function likePost(like,postId,userId){
-        const body = {
-            userId: userId,
-            like:like
-        }
-        console.log("like body :",body)
-        AuthCtx.initHeadersForFetch("POST",body).then( (init)=>{
-            fetch(`http://localhost:4000/api/post/${postId}/like`,init).then(res => res.json()).then(
-                data => console.log("réponse like :", data.message)
-            )
+        return new Promise((resolve,reject) =>{
+            const body = {
+                userId: userId,
+                like:like
+            }
+            console.log("like body :",body)
+            AuthCtx.initHeadersForFetch("POST",body).then( (init)=>{
+                fetch(`http://localhost:4000/api/post/${postId}/like`,init).then(res => res.json()).then(
+                    data => {
+                        console.log("réponse like :", data.message)
+                        resolve(data)
+                    }
+                ).catch(err=>{
+                    console.log("réponse like :",err.message)
+                    reject(err)
+                })
+            })
         })
     };
     

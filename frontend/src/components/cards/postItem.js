@@ -15,6 +15,9 @@ function PostItem(props) {
     //importation du contexte d'authentification
     const AuthCtx = useContext(AuthContext)
 
+    //Message sert à afrficher les messages d'erreurs en provenance de l'API
+    const [message, changeMessage] = useState("")
+
     //calcul du karma à ârtir des tables upvotes et downvotes
     const upVotes = props.usersUpvotes.length
     const downVotes =  props.usersDownvotes.length
@@ -38,29 +41,40 @@ function PostItem(props) {
 
     //Cette fonction sert à flagger les posts
     function setFlaggedHandler(){
-        console.log("flagging")
-        AuthCtx.initHeadersForFetch("PUT").then( (init)=>{
-            fetch(`http://localhost:4000/api/post/flag/${props.postId}`,init
-            ).then(data => data.json()
-            ).then(res => {
-                console.log(res)
-                isFlagged=true;
-                setFlagged(isFlagged)
-            })
-        })
+        return new Promise((resolve,reject) =>{
+            console.log("flagging")
+            AuthCtx.initHeadersForFetch("PUT").then( (init)=>{
+                fetch(`http://localhost:4000/api/post/flag/${props.postId}`,init
+                ).then(data => data.json()
+                ).then(res => {
+                    console.log(res)
+                    resolve(res)
+                }).catch(err=>{reject(err)})
+            }).catch(err=>{reject(err)})
+        }).then(data => {
+            isFlagged=true;
+            setFlagged(isFlagged)
+            changeMessage(data.message)})
+        .catch(err => {changeMessage(err.message)})
+
     }
 
     function setUnflaggedHandler(){
-        console.log("unflagging")
-        AuthCtx.initHeadersForFetch("PUT").then( (init)=>{
-            fetch(`http://localhost:4000/api/post/unflag/${props.postId}`,init
-            ).then(data => data.json()
-            ).then(res => {
-                console.log(res)
-                isFlagged=false;
-                setFlagged(isFlagged)
-            })
-        })
+        return new Promise((resolve,reject) =>{
+            console.log("unflagging")
+            AuthCtx.initHeadersForFetch("PUT").then( (init)=>{
+                fetch(`http://localhost:4000/api/post/unflag/${props.postId}`,init
+                ).then(data => data.json()
+                ).then(res => {
+                    console.log(res)
+                    resolve(res)
+                }).catch(err=>{reject(err)})
+            }).catch(err=>{reject(err)})
+        }).then(data => {
+            isFlagged=false;
+            setFlagged(isFlagged)
+            changeMessage(data.message)})
+        .catch(err => changeMessage(err.message))
     }
 
     return (    
@@ -71,7 +85,7 @@ function PostItem(props) {
                         <Card.Text className="text-light"> 
                             <p>Karma: {karma} 
                                 <span className="mini"> {/*Pouce levé blanc si post liké, pouce baissé blanc si post disliké, sinon pouces bleus */}
-                                    <LikeInterface {...props} />
+                                    <LikeInterface {...props} changeMessage={changeMessage} />
                                     <span className="text-danger mx-1"> {flagged? isAdmin? <i className="fas fa-flag cursor-pointer text-primary" onClick={setUnflaggedHandler}> Contenu acceptable </i> : <i className="fas fa-flag"> contenu signalé</i> : <i class="far fa-flag cursor-pointer" onClick={setFlaggedHandler}> signaler ce contenu</i>} </span>
                                 </span> 
                             </p>
@@ -83,6 +97,8 @@ function PostItem(props) {
                     </Card.Body>
                     <Card.Img variant="top" src={`http://localhost:4000/images/${props.imageUrl}`} />
                 </Card>
+                <p className="text-danger col col-md-6 mx-auto">{message}</p>
+               
         </div>
     )
 }

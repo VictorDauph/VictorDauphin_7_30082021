@@ -67,13 +67,13 @@ function CustomDropdownMenu(props){
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="bg-secondary">
                     <Dropdown.Item>
-                        <Link className="text-decoration-none" to="/">Login</Link>
-                    </Dropdown.Item>
-                    <Dropdown.Item>
-                        <p className="text-decoration-none text-primary" onClick={logoutHandler} >Logout</p>
+                        <Link className="text-decoration-none">Créer Post</Link>
                     </Dropdown.Item>
                     <Dropdown.Item>
                         <Link className="text-decoration-none" /*to="/" */ >Mon Fil</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item>
+                        <p className="text-decoration-none text-primary" onClick={logoutHandler} >Logout</p>
                     </Dropdown.Item>                    
                     <Dropdown.Item>
                         <Link className="text-decoration-none text-danger" /*to="/" */ >Supprimer compte</Link>
