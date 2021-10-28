@@ -4,7 +4,7 @@ import PostListing from "../components/cards/postListing"
 
 //importation des éléments contextuels liés à la récupération de donnée via l'API avec fetch.
 import { useContext } from "react";
-import GetPostsContext from "../ApiHandling/getPostsContext";
+import ApiContext from "../ApiHandling/ApiContext";
 
 
 import {useEffect } from "react";
@@ -37,7 +37,7 @@ const allPostsDummy = [
 
 function Feed(){
       //On utilise le contexte pour pouvoir écrire la fonction fetch dans un autre fichier, ce qui permet de mieux ranger et aussi de créer une fonction fetch get réutilisable en fonction de l'URI fournie.
-    const getPostsCtx = useContext(GetPostsContext)    
+    const getPostsCtx = useContext(ApiContext)    
 
     //allPosts Dummy est un array de faux posts codé en dur pour les tests d'affichage des composants.
     //const allPosts = allPostsDummy

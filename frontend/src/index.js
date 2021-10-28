@@ -12,16 +12,16 @@ import App from './App';
 
 //Il est impératif que les composants du contexte englobent l'entièreté du projet pour pouvoir être pris en compte à n'importe quel niveau.
 import {AuthContextProvider} from "./authentification/authContext"
-import { GetPostsContextProvider } from './ApiHandling/getPostsContext';
+import { ApiContextProvider } from './ApiHandling/ApiContext';
 
 
 ReactDOM.render(
   <AuthContextProvider>
-    <GetPostsContextProvider>
+    <ApiContextProvider>
         <BrowserRouter>
           <App />
       </ BrowserRouter>
-    </GetPostsContextProvider>
+    </ApiContextProvider>
   </AuthContextProvider>,
   document.getElementById('root')
 );

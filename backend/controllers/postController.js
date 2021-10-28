@@ -7,6 +7,7 @@ const fs = require('fs');
 
 //cette fonction sert à liker et disliker les posts
 exports.likePost= (req, res, next) =>{
+  console.log("like request body :", req.body)
   const userId= req.body.userId;
   const postId= req.params.postId;
   const likevalue = req.body.like;

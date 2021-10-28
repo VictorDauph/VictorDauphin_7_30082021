@@ -10,6 +10,7 @@ export const AuthContext = createContext({
     isAuthenticated:() =>{},
     logout:() =>{},
     initHeadersForFetch:() =>{},
+    authentifiedUserDatas:() =>{},
 });
 
 
@@ -17,6 +18,7 @@ export const AuthContext = createContext({
 export function AuthContextProvider(props){
     let userAuth = false
 
+        //Cette fonction stocke les données de l'utilisateur qui s'authentifie dans le local storage en ecrasant celles déjà stockées. Un seul utilsiateur peut être identifié à la fois côté client.
         function loginHandler(redirection,userId,role, token){ //en argument de login on passe une fonction de redirection qui doit être éxécutée une fois l'authentification réalisée.
             console.log("demande d'authentification")
             const userDatas = {id:userId,role:role,token:token}
@@ -26,25 +28,26 @@ export function AuthContextProvider(props){
             
         }
 
+        //Cette fonction supprime les infos utilisateurs stockées dans localStorage
         function logoutHandler(redirection){
             console.log("logging out")
             localStorage.removeItem("userDatas")
             redirection();
         }
 
-        function checkLocalStorage(userDatas)
-        {
-                if (userDatas !==null){
-                    console.log("setting true")
-                    return true
-                }
-                else{
-                    console.log("setting false")
-                    return false
-                }
-        }
-
+        //Cette fonction retourne true si un utilisateur est authentifié et false si non.
         function isAuthenticatedHandler(){
+            function checkLocalStorage(userDatas)
+            {
+                    if (userDatas !==null){
+                        console.log("setting true")
+                        return true
+                    }
+                    else{
+                        console.log("setting false")
+                        return false
+                    }
+            }
             const userDatas = localStorage.getItem("userDatas")
             userAuth = checkLocalStorage(userDatas) //l'utilisateur est considéré comme authentifié sur userDatas est présent dans le LocalStorage
             return userAuth;
@@ -52,7 +55,7 @@ export function AuthContextProvider(props){
 
             //les headers de toutes les fonction fetch get sont identiques et sont paramètrées ici. On définit init sous forme de promesse pour éviter des erreurs d'authentification au chargement de la page. 
             //Il faut passer la method "GET", "POST","DELETE" ou "PUT" en argument à la fonction.
-        function initHeadersForFetch(method){ 
+        function initHeadersForFetch(method,bodyToFetch){ 
             return new Promise ((resolve) => {
                 const userDatas = JSON.parse(localStorage.getItem("userDatas"))
                 let token = ""
@@ -66,19 +69,22 @@ export function AuthContextProvider(props){
                 console.log ("myHeaders.get", myHeaders.get("Authorization"))
                 
                 const fetchHeader = {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${token}`,
+                'Content-type': 'application/json'
                 }
                 
-                const initHeader = {
+                const init = {
                     method: method,
                     headers: fetchHeader,
                     mode: 'cors',
-                    cache: 'default'
+                    cache: 'default',
+                    body: JSON.stringify(bodyToFetch)
                 }
-                resolve(initHeader)
+                resolve(init)
             })
         }
 
+        //Cette fonction retourne true si l'utilisateur authentifié est un admin et false dans tous les autres cas.
         function isAdmin(){
             const userDatas = JSON.parse( localStorage.getItem("userDatas"))
             if (userDatas.role == "admin")
@@ -87,13 +93,22 @@ export function AuthContextProvider(props){
                 {return false}
         }
 
+        //Cette fonction retourne les données utilisateur stockées dans le local storage
+        function authentifiedUserDatas(){
+            return new Promise ((resolve) => { //mettre cette partie dans le contexte d'authentification?
+                resolve (JSON.parse(localStorage.getItem("userDatas")))
+            })
+        }
+
+
         const context = {
             authenticated:userAuth,
             isAdmin:isAdmin,
             login:loginHandler,
             isAuthenticated:isAuthenticatedHandler,
             logout:logoutHandler,
-            initHeadersForFetch:initHeadersForFetch
+            initHeadersForFetch:initHeadersForFetch,
+            authentifiedUserDatas:authentifiedUserDatas
         };
 
     return(<AuthContext.Provider value={context}> {/* Ce bout de code sert à passer le contenu de AuthContext au reste du projet. */}
