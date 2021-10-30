@@ -60,7 +60,7 @@ function CreatePostForm(props){
 
             <Form.Group className="p-3 mb-5 rounded text-primary bg-secondary" controlId="formFile">
                 <Form.Label>Sélectionner une image</Form.Label>
-                <Form.Control type="file" ref={formFileInput} />
+                <Form.Control className="bg-secondary text-white" type="file" ref={formFileInput} />
             </Form.Group>
 
             <Button className="text-primary bg-secondary border-0" type="submit">
