@@ -80,7 +80,7 @@ exports.likePost= (req, res, next) =>{
     console.log("création du post", postObject)
     const post = new Post ({
       ...postObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet Post et des données contenues dans la requête.
-      imageUrl: req.file.filename, //sert à créer une URL selon les méthodes propres à Multer, désactiver pour des tests avec Postman, activer pour la gestion d'images
+      imageUrl: req.file.filename, //sert à créer une URL pour retrouver l'image
       usersLiked : [],
       usersdisLiked : []
     });
@@ -124,7 +124,7 @@ exports.getPostsFromUser = (req, res, next) =>{
 
 //Fonction de récupération de tous les posts
 exports.getAllPosts = (req, res, next) => {
-    Post.findAll() //Sauce.find va chercher tous les objets posts de la base de données et les retourner.
+    Post.findAll() //Post.find va chercher tous les objets posts de la base de données et les retourner.
     .then(posts => res.status(200).json(posts)) 
     .catch(error => res.status(400).json({error}));
     }

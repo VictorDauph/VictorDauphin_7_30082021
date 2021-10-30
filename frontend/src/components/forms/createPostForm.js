@@ -1,5 +1,7 @@
 //Le composant createPostForm permet d'afficher et de gérer l'interface de création de posts.
 
+//Importation de useHistory pour  navigation programmatique
+import { useHistory } from "react-router-dom";
 //react-bootstrap permet d'utiliser des composant spécifiques pour les Form et les Button
 import {Form, Button} from "react-bootstrap"
 //useRef permet de lire le contenu d'un input.
@@ -15,6 +17,9 @@ function CreatePostForm(props){
     const formFileInput = useRef()
     //importation du contexte d'authentification
     const AuthCtx = useContext(AuthContext)
+    //Cette redirection remène sur le fil global après la création d'un post
+    const history = useHistory() //history est est utilisée pour la navigation programmatique
+    const redirection = () => {history.push("/feed");} 
 
     function handleSubmit(event){
         event.preventDefault(); //empêche le rechargement de la page. comportement pas défaut du bouton
@@ -34,8 +39,9 @@ function CreatePostForm(props){
         data.append("image", fileValue) //il vaut mieux attacher le fichier en dernier pour eviter certains bugs.
         axios.post("http://localhost:4000/api/post",data,config
         ).then( res => {
-            props.changeMessage(res.data.message)}
-        ).catch( err => props.changeMessage("error", err))
+            props.changeMessage(res.data.message)
+            redirection()
+        }).catch( err => props.changeMessage("error", err))
 
 
         })
