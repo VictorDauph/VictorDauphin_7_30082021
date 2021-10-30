@@ -3,18 +3,45 @@
 //react-bootstrap permet d'utiliser des composant spécifiques pour les Form et les Button
 import {Form, Button} from "react-bootstrap"
 //useRef permet de lire le contenu d'un input.
-import {useRef} from "react"; 
+import {useRef, useContext} from "react"; 
+//axios est le plugin qui permet d'envoyer des fichiers
+import axios from "axios"
+
+import { AuthContext } from "../../authentification/authContext";
 
 function CreatePostForm(props){
+    //variables de lecture des inputs
     const titleInput = useRef()
     const formFileInput = useRef()
+    //importation du contexte d'authentification
+    const AuthCtx = useContext(AuthContext)
 
     function handleSubmit(event){
         event.preventDefault(); //empêche le rechargement de la page. comportement pas défaut du bouton
-        const title = titleInput.current.value
-        const file = formFileInput.current.value
-        props.changeMessage(title)
-        console.log("file :", file) // /!\ Comment on envoie un fichier?
+        const titleValue = titleInput.current.value
+        const fileValue = formFileInput.current.files[0]
+
+        AuthCtx.authentifiedUserDatas().then( usersDatas =>{
+        //formData est un format spécial qui permet de stocker et échanger des données en binaires: ficjiers et images
+        const config={
+            headers:{
+                 Authorization: `Bearer ${usersDatas.token}`
+               }
+        }
+        const data = new FormData();
+        data.append("title", titleValue)
+        data.append("userId", usersDatas.id)
+        data.append("image", fileValue) //il vaut mieux attacher le fichier en dernier pour eviter certains bugs.
+        axios.post("http://localhost:4000/api/post",data,config
+        ).then( res => {
+            props.changeMessage(res.data.message)}
+        ).catch( err => props.changeMessage("error", err))
+
+
+        })
+
+
+
     }
     
     return(

@@ -80,13 +80,13 @@ exports.likePost= (req, res, next) =>{
     console.log("création du post", postObject)
     const post = new Post ({
       ...postObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet Post et des données contenues dans la requête.
-      //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`, //sert à créer une URL selon les méthodes propres à Multer, désactiver pour des tests avec Postman, activer pour la gestion d'images
+      imageUrl: req.file.filename, //sert à créer une URL selon les méthodes propres à Multer, désactiver pour des tests avec Postman, activer pour la gestion d'images
       usersLiked : [],
       usersdisLiked : []
     });
     post.save() //Save est une méthode des schémas de données qui sauvegarde un objet dans la base.
     .then(() => res.status(201).json({message: 'objet enregistré'}))
-    .catch(error => res.status(400).json({error}));  
+    .catch(error => res.status(400).json({message:error.message}));  
   };
 
 //fonction de suppression des posts

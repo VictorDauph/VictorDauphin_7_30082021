@@ -61,12 +61,6 @@ export function AuthContextProvider(props){
                 let token = ""
                 if(userDatas !== null)
                     {token = userDatas.token}
-
-
-                const myHeaders= new Headers({
-                    Authorization: "Bearer", token
-                });
-                console.log ("myHeaders.get", myHeaders.get("Authorization"))
                 
                 const fetchHeader = {
                 Authorization: `Bearer ${token}`,
@@ -95,7 +89,7 @@ export function AuthContextProvider(props){
 
         //Cette fonction retourne les données utilisateur stockées dans le local storage
         function authentifiedUserDatas(){
-            return new Promise ((resolve) => { //mettre cette partie dans le contexte d'authentification?
+            return new Promise ((resolve) => { 
                 resolve (JSON.parse(localStorage.getItem("userDatas")))
             })
         }

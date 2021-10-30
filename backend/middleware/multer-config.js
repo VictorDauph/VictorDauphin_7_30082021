@@ -19,4 +19,8 @@ const storage = multer.diskStorage({
     }
 });
 
-module.exports = multer({storage}).single('image');
+module.exports = multer({storage}).single('image'); 
+/* l'argument de single doit correspondre au nom de champs entré côté client dans le formData: 
+const data = new FormData();
+data.append("image", file) ici, premier argument de data.append: "image"
+*/
