@@ -33,11 +33,11 @@ function CustomDropdownMenu(props){
             }).then( () => {
             const bodyToFetch= JSON.stringify(body)
             AuthCtx.initHeadersForFetch("DELETE",body).then(init =>{
-            fetch(`http://localhost:4000/api/account/`,init)
-             }).then(()=>{
-             localStorage.clear("userDatas")
-             history.push("/")
-         })
+            fetch(`http://localhost:4000/api/account/`,init).then(()=>{
+                localStorage.clear("userDatas")
+                history.push("/")
+                }).catch(err => alert(err.message))
+            })
         })            
     } 
     
