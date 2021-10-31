@@ -1,0 +1,13 @@
+- modifs BDD Arsène
+-suppression utilisateur.
+-Fil Utilisateur != de soi
+-modif dropdown menu pour plus de doublons: (liste de boutons qui s'affichent avec des conditions ou)
+
+-page post:
+suppression de posts
+gestion des commentaires: ajout/suppression/modif/flag
+
+-interface Admin:
+ajout d'un bouton admin dans le header des admins
+affichage des posts flaggés
+possibilité de supprimer posts et commentaires

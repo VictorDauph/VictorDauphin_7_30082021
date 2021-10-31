@@ -13,8 +13,14 @@ import {AuthContext} from "../../authentification/authContext";
 //importation du composant qui gère les likes
 import LikeInterface from "../layout/likeInterface";
 
+//Importation de useHistory pour  navigation programmatique
+import { useHistory } from "react-router-dom";
+
 
 function PostItem(props) {
+    //history est est utilisée pour la navigation programmatique
+    const history = useHistory() 
+
     //importation du contexte d'authentification
     const AuthCtx = useContext(AuthContext)
 
@@ -80,6 +86,13 @@ function PostItem(props) {
         .catch(err => changeMessage(err.message))
     }
 
+    function goToUserFeed(){
+
+        console.log("goToTuserFeed", props.userId)
+        localStorage.setItem("userFeed",props.userId)
+        history.push("/userFeed")
+    }
+
     return (    
         <div className="raw my-3 mx-3">
                 <Card className="col col-md-6 mx-auto bg-secondary">
@@ -94,7 +107,7 @@ function PostItem(props) {
                             </p>
                             <p className="mini">
                                 crée le: {props.createdAt} par 
-                                <Link className="text-decoration-none" to="/user"><span className="text-primary cursor-pointer">  {props.userId} </span> </Link>
+                                <span className="text-primary cursor-pointer" onClick={goToUserFeed}>  {props.userId} </span>
                             </p>
                         </Card.Text>
                     </Card.Body>

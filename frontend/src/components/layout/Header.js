@@ -4,6 +4,7 @@ import CustomDropdownMenu from "./CustomDropdownMenu";
 function Header(props) {
     
     //Fonction d'appel de la fonction logout depuis le contexte.
+    console.log("header headerType", props.headerType)
 
         const title= "Groupomania";
         return(

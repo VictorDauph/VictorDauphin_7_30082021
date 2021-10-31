@@ -10,30 +10,35 @@ import {AuthContext } from "../authentification/authContext";
 
 import {useEffect } from "react";
 
-function MyFeed(props){
+function UserFeed(props){
       //On utilise le contexte pour pouvoir écrire la fonction fetch dans un autre fichier, ce qui permet de mieux ranger et aussi de créer une fonction fetch get réutilisable en fonction de l'URI fournie.
     const ApiCtx = useContext(ApiContext)    
-    const AuthCtx = useContext(AuthContext)
+
+    function getFeedUserId(){
+      return new Promise ((resolve) => { 
+        resolve (localStorage.getItem("userFeed"))
+    })
+    }
 
     //on récupère l'Id de l'utilisateur depuis le localStorage pour préparer le body de la requête
     
     
     useEffect(()=> { //useEffect évite une boucle infinie qui pousse le composant à se recharger à fois qu'il appelle fetch.
-        AuthCtx.authentifiedUserDatas().then(userdatas =>{ //on a besoin de récuper les données de connection de l'utilisateur pour inclure son id dans l'URL de la requête
-            ApiCtx.getPosts(`http://localhost:4000/api/post/fromUser/${userdatas.id}`)
+        getFeedUserId().then(feedUserId =>{ //on a besoin de récuper les données de connection de l'utilisateur pour inclure son id dans l'URL de la requête
+            console.log("feedUserId",feedUserId)
+            ApiCtx.getPosts(`http://localhost:4000/api/post/fromUser/${feedUserId}`)
         })
         
       }, []); //[] est vide car il n'ya pas d'external dependencie dans la fonction gérée par useEffect. S'il y'en avait eu, il aurait fallu les inclure dans l'array.
     console.log("loadedPosts", ApiCtx.loadedPosts)
-    console.log("my feed headerType", props.headerType)
     
 
     return(
     <div>
-        <Header headerType="myFeed"  />
+        <Header headerType = "userFeed"/>
         <PostListing posts = {ApiCtx.loadedPosts} title={"Mon fil personnel"} />
     </div>
     )
 } 
 
-export default MyFeed
+export default UserFeed
