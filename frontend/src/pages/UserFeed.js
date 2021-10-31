@@ -5,10 +5,10 @@ import PostListing from "../components/cards/postListing"
 //importation des éléments contextuels liés à la récupération de donnée via l'API avec fetch.
 import { useContext } from "react";
 import ApiContext from "../ApiHandling/ApiContext";
-import {AuthContext } from "../authentification/authContext";
 
 
-import {useEffect } from "react";
+
+import {useEffect, useState } from "react";
 
 function UserFeed(props){
       //On utilise le contexte pour pouvoir écrire la fonction fetch dans un autre fichier, ce qui permet de mieux ranger et aussi de créer une fonction fetch get réutilisable en fonction de l'URI fournie.
@@ -22,10 +22,11 @@ function UserFeed(props){
 
     //on récupère l'Id de l'utilisateur depuis le localStorage pour préparer le body de la requête
     
-    
+    const [feedUser,setFeedUser]= useState()
     useEffect(()=> { //useEffect évite une boucle infinie qui pousse le composant à se recharger à fois qu'il appelle fetch.
         getFeedUserId().then(feedUserId =>{ //on a besoin de récuper les données de connection de l'utilisateur pour inclure son id dans l'URL de la requête
             console.log("feedUserId",feedUserId)
+            setFeedUser(feedUserId)
             ApiCtx.getPosts(`http://localhost:4000/api/post/fromUser/${feedUserId}`)
         })
         
@@ -36,7 +37,7 @@ function UserFeed(props){
     return(
     <div>
         <Header headerType = "userFeed"/>
-        <PostListing posts = {ApiCtx.loadedPosts} title={"Mon fil personnel"} />
+        <PostListing posts = {ApiCtx.loadedPosts} title={"Fil de "+feedUser} />
     </div>
     )
 } 

@@ -1,7 +1,8 @@
 - modifs BDD Arsène
 -suppression utilisateur.
--Fil Utilisateur != de soi
--modif dropdown menu pour plus de doublons: (liste de boutons qui s'affichent avec des conditions ou)
+-Fil Utilisateur != de soi /OK\
+-modif dropdown menu pour plus de doublons: (liste de boutons qui s'affichent avec des conditions ou) /OK\
+- ajouter lien sur logo vers fil. (dispo seulement si utilisateur authentifié)
 
 -page post:
 suppression de posts

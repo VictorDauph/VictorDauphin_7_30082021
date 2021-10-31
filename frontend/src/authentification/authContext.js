@@ -98,7 +98,6 @@ export function AuthContextProvider(props){
             })
         }
 
-
         const context = {
             authenticated:userAuth,
             isAdmin:isAdmin,
