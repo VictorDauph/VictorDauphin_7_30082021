@@ -24,7 +24,11 @@ export function AuthContextProvider(props){
             const userDatas = {id:userId,role:role,token:token}
             localStorage.setItem("userDatas", JSON.stringify(userDatas))
             console.log("stored userDatas", localStorage.getItem("userDatas"))
-            redirection()
+            console .log("userId", userDatas)
+            if(userDatas.id !== undefined){
+                redirection()
+            }
+            
             
         }
 
