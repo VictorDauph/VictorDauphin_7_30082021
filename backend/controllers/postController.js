@@ -95,14 +95,14 @@ exports.likePost= (req, res, next) =>{
     console.log("demande de suppression du post : ", req.params.postId)
     return Post.findOne({ where: {postId: req.params.postId }}) //on cherche l'objet dans la base de données
     .then( post => {
-        /*
-        const filename = post.imageUrl.split('/images')[1] //filename récupère le nom du fichier à supprimer
-        fs.unlink(`images/${filename}`, ()=> { //fs.unlink supprime le fichier image, puis le callback supprime l'objet, à intégrer une fois qu'on pourra envoyer des fichiers images
-        */
+        
+        const filename = post.imageUrl //filename récupère le nom du fichier à supprimer
+        fs.unlink(`images/${filename}`, ()=> { //fs.unlink supprime le fichier image, puis le callback supprime le post
+        
           post.destroy({ where: {postId: req.params.postId }})
           .then(() => res.status(200).json({ message: 'post supprimé'}))
           .catch(error => res.status(404).json({error}));
-        /*}) La fonction de suppression de l'image sera à gérer une fois l'envoie d'objet côte front implémenté*/
+        }) //La fonction de suppression de l'image sera à gérer une fois l'envoie d'objet côte front implémenté
     })
     .catch(error => res.status(500).json({error}));
 

@@ -31,7 +31,7 @@ router.post('/:postId/like',auth,postCtrl.likePost);
 router.post('/', auth, multer,  postCtrl.createPost);
 
 //route delete pour suppression d'un post
-router.delete('/:postId',auth,checkUser,checkPostsRights,postCtrl.deletePost );
+router.delete('/:postId/',auth,checkUser,checkPostsRights,postCtrl.deletePost );
 
 // Cette route va chercher tous les posts pour les passer au frontend. Les posts sont formatés selon ce qui est attendu par le front-end.
 router.get('/', auth, postCtrl.getAllPosts);

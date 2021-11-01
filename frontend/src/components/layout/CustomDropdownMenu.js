@@ -32,7 +32,9 @@ function CustomDropdownMenu(props){
             body.userId = datas.id
             }).then( () => {
             AuthCtx.initHeadersForFetch("DELETE",body).then(init =>{
-            fetch(`http://localhost:4000/api/account/`,init).then(()=>{
+            fetch(`http://localhost:4000/api/account/`,init).then(res=>res.json()).then(res=>{
+                console.log(res.message)
+                alert(res.message)
                 localStorage.clear("userDatas")
                 history.push("/")
                 }).catch(err => alert(err.message))

@@ -1,14 +1,23 @@
-- modifs BDD Arsène
--suppression utilisateur.
+
+-suppression utilisateur. /OK\
 -Fil Utilisateur != de soi /OK\
 -modif dropdown menu pour plus de doublons: (liste de boutons qui s'affichent avec des conditions ou) /OK\
-- ajouter lien sur logo vers fil. (dispo seulement si utilisateur authentifié)
+- ajouter lien sur logo vers fil. (dispo seulement si utilisateur authentifié) /OK\
+- gestion erreure authetification expirée /OK\
+
 
 -page post:
+-Modif API pour récupérer un post et ses commentaire /OK\
+-Afficher, créer supprimer commentaires
+- Créer une fonction type getPosts mais pour
 suppression de posts
 gestion des commentaires: ajout/suppression/modif/flag
+-Vérifier suppression des images à la suppression des posts
+-Vérifier suppression des images à la suppression de l'utilisateur 
 
 -interface Admin:
 ajout d'un bouton admin dans le header des admins
 affichage des posts flaggés
 possibilité de supprimer posts et commentaires
+
+- modifs BDD Arsène

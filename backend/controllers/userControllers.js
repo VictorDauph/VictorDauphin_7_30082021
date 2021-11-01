@@ -12,12 +12,16 @@ const tokenValidity = process.env.TOKEN_VALIDITY;
 
 //importation schéma de données utilisateur
 const User = require('../models/user');
+const Post = require('../models/post')
 
 //importe le plugin password-validator
 const passwordValidator = require('password-validator');
 
 //créé un schéma de données pour mots de passes
 const schemaPassword = require("../models/password")
+
+//Cette ligne importe file system, qui permet de gérer des fichiers (notemment pour la suppression d'images du dossier images)
+const fs = require('fs');
 
 //fonction de création de compte
 exports.signup = (req, res, next) => {
@@ -80,7 +84,17 @@ exports.login = (req, res, next) => {
 
 //fonction de suppression utilisateur.
 exports.delete = (req, res, next) =>{
-    console.log("authorized delete request")
+    console.log("deleting user")
+
+    Post.findAll({ where: {userId: req.body.userId }}) //On supprime d'abord toutes les images des post créés par l'utilisateur. Les objets Posts sont supprimés directement de la BDD à la suppression de l'utilisateur grâce aux clés étrangères.
+    .then( posts => {
+            posts.map(post=>{
+                const filename = post.imageUrl
+                console.log("deleting picture :", filename)
+                fs.unlink(`images/${filename}`, ()=>{}) //fs.unkink nécessite une fonction de callback pour fonctionner correctement
+            })
+    })
+    
     User.findOne({where: {userId: req.body.userId}})
     .then( user => { 
         user.destroy({
@@ -90,7 +104,6 @@ exports.delete = (req, res, next) =>{
         .catch(error => res.status(404).json({message:error}));
       })
     .catch(error => res.status(500).json({message:error})); 
-
   }; 
 
   //fonction de récupération d'un email utilisateur

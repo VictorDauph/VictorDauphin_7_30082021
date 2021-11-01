@@ -1,19 +1,17 @@
 //importation des composants à afficher
 import Header from "../components/layout/Header";
 import PostListing from "../components/cards/postListing"
-
+import DeleteInterface from "../components/layout/deleteInterface";
 //importation des éléments contextuels liés à la récupération de donnée via l'API avec fetch.
 import { useContext } from "react";
 import ApiContext from "../ApiHandling/ApiContext";
-
-
-
 import {useEffect, useState } from "react";
-import SignupPage from "./SignupPage";
 
-function SinglePost(props){
+
+function SinglePost(){
       //On utilise le contexte pour pouvoir écrire la fonction fetch dans un autre fichier, ce qui permet de mieux ranger et aussi de créer une fonction fetch get réutilisable en fonction de l'URI fournie.
     const ApiCtx = useContext(ApiContext)    
+    const[postId,setPostId]=useState()
 
     function getPostId(){
       return new Promise ((resolve) => { 
@@ -27,6 +25,7 @@ function SinglePost(props){
     useEffect(()=> { //useEffect évite une boucle infinie qui pousse le composant à se recharger à fois qu'il appelle fetch.
         getPostId().then(feedPostId =>{ //on a besoin de récuper les données de connection de l'utilisateur pour inclure son id dans l'URL de la requête
             console.log("feedUserId",feedPostId)
+            setPostId(feedPostId)
             ApiCtx.getPosts(`http://localhost:4000/api/post/single/${feedPostId}`)
         })
         
@@ -38,6 +37,7 @@ function SinglePost(props){
     <div>
         <Header headerType = "userFeed"/>
         <PostListing posts = {ApiCtx.loadedPosts} title={"Page du Post"} />
+        <DeleteInterface post = {ApiCtx.loadedPosts} />
     </div>
     )
 } 

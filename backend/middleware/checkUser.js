@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
         console.log("token user ID: ", userId, "body request id: ", req.body.userId, "role :",role )
         if (req.body.userId != userId && role !=admin){ // Si l'userId passé par la requête http est différent de celui contenu dans le token
             throw 'Action non autorisée pour cet utilisateur';
-        } else if (role === "admin") {
+        } else if (role == "admin") {
             console.log("autorisation administrateur")
             next(); /*Ce middleware est utilisé par d'autres middlewares avant de faire quoi que se soit. si l'authentification rate, 
                         alors il bloque le processus. Sinon il passe au middleware suivant.*/
@@ -27,6 +27,7 @@ module.exports = (req, res, next) => {
                         alors il bloque le processus. Sinon il passe au middleware suivant.*/
          }  
     } catch (error) {
-        res.status(401).json({error});
+        console.log("échec vérification utilisateur")
+        res.status(401).json({message:"échec vérification utilisateur"});
     }
 };
