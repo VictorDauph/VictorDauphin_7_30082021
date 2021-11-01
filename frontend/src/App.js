@@ -8,6 +8,7 @@ import Feed from "./pages/Feed";
 import NewPost from "./pages/newPost";
 import MyFeed from "./pages/myFeed";
 import UserFeed from "./pages/UserFeed";
+import SinglePost from "./pages/singlePost";
 
 //importation du composant de protection des routes
 import ProtectedRoute from "./authentification/protectedRoutes";
@@ -23,6 +24,7 @@ function App() {
           <ProtectedRoute path="/newPost" exact component={NewPost}  />
           <ProtectedRoute path="/myFeed" exact component={MyFeed}  />
           <ProtectedRoute path="/userFeed" exact component={UserFeed} />
+          <ProtectedRoute path="/singlePost" exact component={SinglePost} />
         </Switch>
     </div>
     );

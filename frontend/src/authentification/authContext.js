@@ -35,7 +35,7 @@ export function AuthContextProvider(props){
         //Cette fonction supprime les infos utilisateurs stockées dans localStorage
         function logoutHandler(redirection){
             console.log("logging out")
-            localStorage.removeItem("userDatas")
+            localStorage.clear()
             redirection();
         }
 

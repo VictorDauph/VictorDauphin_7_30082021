@@ -42,8 +42,10 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
                     console.log("fetching posts", init.headers.Authorization)     
                     fetch(getUri, init).then(res => res.json()).then(
                         posts => {
-                            posts.map(
+                            console.log("fetched posts :", posts.posts)
+                            posts.posts.map(
                                 post =>{
+                                    console.log("mapped post:", post)
                                         const formatedPost = {
                                             ...post,
                                             usersUpvotes: JSON.parse(post.usersUpvotes),
@@ -58,7 +60,7 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
                         }
                     ).catch(() =>{ 
                         alert("Authentification éxpirée")
-                        AuthCtx.logout(redirectionIfFailed)
+                        //AuthCtx.logout(redirectionIfFailed)
                     })
                 })
     }

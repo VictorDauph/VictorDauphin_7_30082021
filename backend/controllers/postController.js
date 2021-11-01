@@ -1,5 +1,6 @@
-//Cette ligne importe les schéma de donnée Posts
+//Cette ligne importe les schéma de donnée Posts et Comments
 const Post= require('../models/post');
+const Comment=require("../models/comment")
 
 //Cette ligne importe file system, qui permet de gérer des fichiers (notemment pour la suppression d'images du dossier images)
 const fs = require('fs');
@@ -108,24 +109,67 @@ exports.likePost= (req, res, next) =>{
   }; 
 
 
-// Fonction de récupération d'un post unique
+// Fonction de récupération d'un post unique Cette fonction renvoie l'objet singlePost qui contient {post:[1post],comments[allComments]}
 exports.getOnePost = (req, res, next) =>{
-    Post.findOne({ where: {postId: req.params.postId }}) //_id est le champs de l'objet thing évalué, req.params.id est la valeur recherchée passée par la requête HTTP (:id). On va donc regarder tous les objets dans la BDD et chercher celui qui a le bon ID.
-    .then(post => res.status(200).json(post))
-    .catch(error => res.status(404).json({"message":error}));
+
+      let singlePost={
+        posts:[null],
+        comments:[null]
+      }
+
+      function findPost(){
+        return new Promise((resolve)=>{
+          Post.findOne({ where: {postId: req.params.postId }}) //_id est le champs de l'objet thing évalué, req.params.id est la valeur recherchée passée par la requête HTTP (:id). On va donc regarder tous les objets dans la BDD et chercher celui qui a le bon ID.
+          .then(post => {
+            resolve([post])
+          })
+        })
+      } 
+      
+      function findComments(){
+        return new Promise((resolve)=>{
+          Comment.findAll({where: {postId: req.params.postId}})
+          .then(comments=>{
+            resolve(comments)
+          })
+        })
+      }
+
+      findPost().then(post =>{//on récupère le post
+        singlePost.posts=post
+      }).then(findComments().then(comments =>{//Puis tous les commentaires liés au post
+        singlePost.comments=comments
+      }).then(()=>{
+        console.log(singlePost)
+        res.status(200).json(singlePost)//puis on renvoie l'objet singlePost où toutes les données sont stockées
+      }).catch(error => res.status(404).json({"message":error}))
+      )
+
+
+
+    
+
+    //res.status(200).json(singlePost)
+    //.catch(error => res.status(404).json({"message":error}));
   };
 
 // Fonction de récupération de tous les posts d'un utilisateur
 exports.getPostsFromUser = (req, res, next) =>{
   Post.findAll({ where: {userId: req.params.GetFromUserId }}) //_id est le champs de l'objet thing évalué, req.params.id est la valeur recherchée passée par la requête HTTP (:id). On va donc regarder tous les objets dans la BDD et chercher celui qui a le bon ID.
-  .then(posts => res.status(200).json(posts))
+  .then(posts => {
+    const postObject={posts:posts}
+    res.status(200).json(postObject)
+  })
   .catch(error => res.status(404).json({error}));
 };
 
 //Fonction de récupération de tous les posts
 exports.getAllPosts = (req, res, next) => {
     Post.findAll() //Post.find va chercher tous les objets posts de la base de données et les retourner.
-    .then(posts => res.status(200).json(posts)) 
+    .then(posts => {
+      const postObject={posts:posts}
+      res.status(200).json(postObject)
+    })
     .catch(error => res.status(400).json({error}));
     }
 
@@ -156,6 +200,9 @@ exports.unflag = (req,res,next) =>{
 // Fonction de récupération des posts signalés
 exports.getFlaggedPosts = (req, res, next) =>{
   Post.findAll({ where: {flagged:true }}) //Chercher tous les comments flaggés
-  .then(posts => res.status(200).json(posts))
+  .then(posts => {
+    const postObject={posts:posts}
+    res.status(200).json(postObject)
+  })
   .catch(error => res.status(404).json({message:error}));
 };

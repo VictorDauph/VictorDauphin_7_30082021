@@ -93,11 +93,18 @@ function PostItem(props) {
         history.push("/userFeed")
     }
 
+    function gotoSinglePost(){
+
+        console.log("gotoSinglePost", props.postId)
+        localStorage.setItem("SinglePost",props.postId)
+        history.push("/singlePost")
+    }
+
     return (    
         <div className="raw my-3 mx-3">
                 <Card className="col col-md-6 mx-auto bg-secondary">
                     <Card.Body>
-                        <Link className="text-decoration-none" to="/post"><Card.Title className="text-primary cursor-pointer" > <h3>{props.title} </h3> </Card.Title></Link>
+                        <span className="text-decoration-none" onClick={gotoSinglePost}><Card.Title className="text-primary cursor-pointer" > <h3>{props.title} </h3> </Card.Title></span>
                         <Card.Text className="text-light"> 
                             <p>Karma: {karma} 
                                 <span className="mini"> {/*Pouce levé blanc si post liké, pouce baissé blanc si post disliké, sinon pouces bleus */}
