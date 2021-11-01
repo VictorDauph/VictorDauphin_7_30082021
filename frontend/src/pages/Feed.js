@@ -3,13 +3,14 @@ import Header from "../components/layout/Header";
 import PostListing from "../components/cards/postListing"
 
 //importation des éléments contextuels liés à la récupération de donnée via l'API avec fetch.
-import { useContext } from "react";
+import { useContext,useState,useEffect } from "react";
 import ApiContext from "../ApiHandling/ApiContext";
 
 
-import {useEffect } from "react";
-
 function Feed(){
+    //gestion message d'erreur
+    const[globalMessage,setGlobalMessage]=useState()
+    
       //On utilise le contexte pour pouvoir écrire la fonction fetch dans un autre fichier, ce qui permet de mieux ranger et aussi de créer une fonction fetch get réutilisable en fonction de l'URI fournie.
     const ApiCtx = useContext(ApiContext)    
 
@@ -25,7 +26,8 @@ function Feed(){
     return(
     <div>
         <Header headerType = "feed"/>
-        <PostListing posts = {ApiCtx.loadedPosts} title={"Fil global"} />
+        <PostListing posts = {ApiCtx.loadedPosts} title={"Fil global"} setGlobalMessage={setGlobalMessage} />
+        <div className="text-danger w-50 mx-auto">{globalMessage}</div>
     </div>
     )
 } 

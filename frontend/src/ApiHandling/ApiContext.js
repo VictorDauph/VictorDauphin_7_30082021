@@ -51,7 +51,7 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
                             )
                             setLoadedPosts(formatedPosts)
                         }
-                    )
+                    ).catch(() => alert("Authentification éxpirée"))
                 })
     }
 
