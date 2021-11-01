@@ -4,6 +4,8 @@ import { createContext, useState, useContext} from "react";
 //importation du contexte d'authentification
 import { AuthContext } from "../authentification/authContext";
 
+
+
 //dummyPosts est un array de faux posts qui servent pour les tests d'affichage
 const allPostsDummy =[
     {
@@ -33,6 +35,9 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
 
     //Pour afficher un post, il faut également afficher l'email de son utilisateur, on le récupère avec la route get adéquate.
     function getPosts(getUri){
+        function redirectionIfFailed(){
+            document.location.href="http://localhost:3000"
+        }
                AuthCtx.initHeadersForFetch().then( (init)=>{
                     console.log("fetching posts", init.headers.Authorization)     
                     fetch(getUri, init).then(res => res.json()).then(
@@ -51,7 +56,10 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
                             )
                             setLoadedPosts(formatedPosts)
                         }
-                    ).catch(() => alert("Authentification éxpirée"))
+                    ).catch(() =>{ 
+                        alert("Authentification éxpirée")
+                        AuthCtx.logout(redirectionIfFailed)
+                    })
                 })
     }
 
