@@ -8,12 +8,11 @@
 
 -page post:
 -Modif API pour récupérer un post et ses commentaire /OK\
+- Supprimer Post /OK\
 -Afficher, créer supprimer commentaires
-- Créer une fonction type getPosts mais pour
-suppression de posts
 gestion des commentaires: ajout/suppression/modif/flag
--Vérifier suppression des images à la suppression des posts
--Vérifier suppression des images à la suppression de l'utilisateur 
+-Vérifier suppression des images à la suppression des posts /OK\
+-Vérifier suppression des images à la suppression de l'utilisateur /OK\
 
 -interface Admin:
 ajout d'un bouton admin dans le header des admins

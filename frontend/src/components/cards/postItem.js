@@ -1,11 +1,8 @@
 //Ce fichier sert à mettre en forme une carte post à partir d'arrays de posts passés depuis postList.
 
 import {useContext, useState, useEffect } from "react";
-//Ce fichier sert à afficher un seul post sous forme de carte.
-import {Card} from 'react-bootstrap'
 
-//Le composant link remplace les balises <a> en React pour la navigation. En effet les <a> sont des liens qui font charger des pages, et en React on ne navigue pas de page en page, mais on modifie la page de manière dynamique avec des routes. Les links servent à gérer les routes sans envoyer de requêtes http.
-import {Link} from "react-router-dom";
+import {Card} from 'react-bootstrap'
 
 //importaion du contexte d'authentification
 import {AuthContext} from "../../authentification/authContext";
@@ -65,7 +62,6 @@ function PostItem(props) {
             setFlagged(isFlagged)
             changeMessage(data.message)})
         .catch(err => {changeMessage(err.message)})
-
     }
 
     function setUnflaggedHandler(){
@@ -104,18 +100,19 @@ function PostItem(props) {
         <div className="raw my-3 mx-3">
                 <Card className="col col-md-6 mx-auto bg-secondary">
                     <Card.Body>
-                        <span className="text-decoration-none" onClick={gotoSinglePost}><Card.Title className="text-primary cursor-pointer" > <h3>{props.title} </h3> </Card.Title></span>
-                        <Card.Text className="text-light"> 
-                            <p>Karma: {karma} 
-                                <span className="mini"> {/*Pouce levé blanc si post liké, pouce baissé blanc si post disliké, sinon pouces bleus */}
-                                    <LikeInterface {...props} changeMessage={changeMessage} />
-                                    <span className="text-danger mx-1"> {flagged? isAdmin? <i className="fas fa-flag cursor-pointer text-primary" onClick={setUnflaggedHandler}> Contenu acceptable </i> : <i className="fas fa-flag"> contenu signalé</i> : <i class="far fa-flag cursor-pointer" onClick={setFlaggedHandler}> signaler ce contenu</i>} </span>
-                                </span> 
-                            </p>
-                            <p className="mini">
-                                crée le: {props.createdAt} par 
-                                <span className="text-primary cursor-pointer" onClick={goToUserFeed}>  {props.userId} </span>
-                            </p>
+                        <span onClick={gotoSinglePost}><Card.Title className="text-primary cursor-pointer" > <h3>{props.title} </h3> </Card.Title></span>
+                            <Card.Text className="text-light"> 
+                                <p>Karma: {karma} 
+                                    <span className="mini"> {/*Pouce levé blanc si post liké, pouce baissé blanc si post disliké, sinon pouces bleus */}
+                                        <LikeInterface {...props} changeMessage={changeMessage} />
+                                        {/* Affichage de l'interface de signalement/désignalement */}
+                                        <span className="text-danger mx-1"> {flagged? isAdmin? <i className="fas fa-flag cursor-pointer text-primary" onClick={setUnflaggedHandler}> Contenu acceptable </i> : <i className="fas fa-flag"> contenu signalé</i> : <i class="far fa-flag cursor-pointer" onClick={setFlaggedHandler}> signaler ce contenu</i>} </span>
+                                    </span> 
+                                </p>
+                                <p className="mini">
+                                    crée le: {props.createdAt} par 
+                                    <span className="text-primary cursor-pointer" onClick={goToUserFeed}>  {props.userId} </span>
+                                </p>
                         </Card.Text>
                     </Card.Body>
                     <Card.Img variant="top" src={`http://localhost:4000/images/${props.imageUrl}`} />

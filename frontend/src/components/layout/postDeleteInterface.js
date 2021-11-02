@@ -5,7 +5,7 @@ import { AuthContext } from "../../authentification/authContext";
 //Importation de useHistory pour  navigation programmatique
 import { useHistory } from "react-router-dom";
 
-function DeleteInterface(props){
+function PostDeleteInterface(props){
     const AuthCtx = useContext(AuthContext)
     const history = useHistory() //history est est utilisée pour la navigation programmatique
 
@@ -24,7 +24,6 @@ function DeleteInterface(props){
     function deletePostHandler(event)
         {   
             event.preventDefault()
-            console.log(props.post[0].postId)
             console.log("deleting post :", postId, "loggedUserId :", loggedUserId, "postUserId", postUserId, "isAdmin :", isAdmin )
             const body={userId:loggedUserId}
             //initHeadersForFetch construit la requête à envoyer à l'API, il suffit ensuite d'appliquer la fonction fetch
@@ -53,4 +52,4 @@ function DeleteInterface(props){
     }
 }
 
-export default DeleteInterface
+export default PostDeleteInterface

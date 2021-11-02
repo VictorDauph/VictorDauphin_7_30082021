@@ -40,6 +40,7 @@ exports.createComment = (req, res, next) =>{
     .catch(error => res.status(404).json({"message":error}));
   }
 
+  //fonction de signalement de commentaire
   exports.flag = (req,res,next) =>{
     console.log("demande de signalement du post :", req.params.commentId)
     Comment.findOne({ where: {commentId: req.params.commentId }})
@@ -50,7 +51,8 @@ exports.createComment = (req, res, next) =>{
     })
     .catch(error => res.status(404).json({"message":error}));
   }
-  
+
+  //fonction de désignalement de commentaire
   exports.unflag = (req,res,next) =>{
     console.log("demande de désignalement du post :", req.params.commentId)
     Comment.findOne({ where: {commentId: req.params.commentId }})

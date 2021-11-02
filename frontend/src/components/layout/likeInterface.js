@@ -31,8 +31,7 @@ function LikeInterface(props){
     //hasUserLikedPost() est une fonction qui doit retourner 0 si l'utilisateur est neutre, 1 s'il a liké le post, -1 s'il l'a disliké.
     const ApiCtx = useContext(ApiContext)
     //stockage des arrays de likes et dislikes dans des states
-    const[usersUpvotes,setUsersUpvotes] = useState(usersUpvotesProps)
-    const[usersDownvotes,setUsersDownvotes] = useState(usersDownvotesProps)
+
  
     //détermination de l'état du post: liké 1 , disliké -1 ou neutre 0 ?
     let isLiked = 2
@@ -68,7 +67,6 @@ function LikeInterface(props){
                     setUserHasLikedPost(isLiked)
                     //modification du nombre de likes
                     usersUpvotesProps.push(authentifiedUserId)
-                    setUsersUpvotes(usersUpvotesProps)
                     changeMessage(data.message)
         }).catch( err=>{
             changeMessage(err.message)
@@ -85,7 +83,6 @@ function LikeInterface(props){
             setUserHasLikedPost(isLiked)
             //modification du nombre de likes
             usersDownvotesProps.push(authentifiedUserId)
-            setUsersUpvotes(usersDownvotesProps)
             changeMessage(data.message)
         }).catch( err=>{
             changeMessage(err.message)
@@ -111,8 +108,6 @@ function LikeInterface(props){
             usersDownvotesProps = checkAndDeleteUser(usersDownvotesProps);
             usersUpvotesProps= checkAndDeleteUser(usersUpvotesProps)
             //Une fois l'utilisateur supprimé on met à jour les states.
-            setUsersUpvotes(usersDownvotesProps)
-            setUsersDownvotes(usersDownvotesProps)
             changeMessage(data.message)
         }).catch( err=>{
             changeMessage(err.message)
@@ -121,15 +116,11 @@ function LikeInterface(props){
 
     useEffect(()=>{
         hasUserLikedPost()
-        setUsersUpvotes(usersUpvotesProps)
-        setUsersDownvotes(usersDownvotesProps)
         setUserHasLikedPost(isLiked)
     },[])
     //useEffect permet de prendre en compte la modification des variables au fur et à mesure.
     useEffect(()=>{
         hasUserLikedPost()
-        setUsersUpvotes(usersUpvotesProps)
-        setUsersDownvotes(usersDownvotesProps)
         setUserHasLikedPost(isLiked)
     },[usersUpvotesProps,usersDownvotesProps,isLiked])
 
