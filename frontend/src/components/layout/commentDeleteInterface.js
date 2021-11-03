@@ -23,6 +23,7 @@ function CommentDeleteInterface(props){
     const isAdmin = AuthCtx.isAdmin();
     const commentId=props.commentId
     const postUserId=props.userId
+    //tableau des commentaires du post chargés depuis le contexte de l'Api:
     const loadedComments=ApiCtx.loadedComments
 
 
@@ -51,10 +52,13 @@ function CommentDeleteInterface(props){
             AuthCtx.initHeadersForFetch("DELETE",body).then(init =>{
                 fetch(`http://localhost:4000/api/comment/${commentId}`,init).then(res => res.json()).then( ans => {
                     alert(ans.message)
+                    props.eraseComment()
+                    /*
                     findIndexOfComment()
                     loadedComments.splice(commentIndex,1)
                     ApiCtx.setUpdatedComments(loadedComments) //Ici y'a un truc pas net! Essayer d'utiliser un state en local?
                     console.log("pdated comments after delete :", ApiCtx.updatedComments )
+                    */
 
                 })
             })
@@ -63,11 +67,9 @@ function CommentDeleteInterface(props){
     if( isAdmin || loggedUserId==postUserId)
     {    
     return(
-            <div className="container">
-                <div className="col col-md-6 mx-auto">
-                    <button className="text-white bg-danger" onClick={deleteCommentHandler} >SUPPRIMER CE COMMENTAIRE</button>
+                <div className="col-md-4">
+                    <button className="text-dark bg-danger" onClick={deleteCommentHandler} >SUPPRIMER</button>
                 </div>
-            </div>
         )
     }
     else

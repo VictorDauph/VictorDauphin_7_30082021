@@ -22,28 +22,23 @@ function SinglePost(){
     }
 
     //on récupère l'Id de l'utilisateur depuis le localStorage pour préparer le body de la requête
-    let loadedPosts= ApiCtx.loadedPosts
-    const loadedComments=ApiCtx.loadedComments
+
     
     useEffect(()=> { //useEffect évite une boucle infinie qui pousse le composant à se recharger à fois qu'il appelle fetch.
         getPostId().then(feedPostId =>{ //on a besoin de récuper les données de connection de l'utilisateur pour inclure son id dans l'URL de la requête
             console.log("feedUserId",feedPostId)
             ApiCtx.getPosts(`http://localhost:4000/api/post/single/${feedPostId}`)
-        })}, []); //[] est vide car il n'ya pas d'external dependencie dans la fonction gérée par useEffect. S'il y'en avait eu, il aurait fallu les inclure dans l'array.
+        })}, []); //On charge les commentaires au chargement de la page
     console.log("loadedPosts", ApiCtx.loadedPosts)
     console.log("loadedComments : ",ApiCtx.loadedComments)
     
-    useEffect(()=>{
-        loadedPosts=ApiCtx.updatedComments
-
-    },ApiCtx.updatedComment)
 
     return(
         <div>
             <Header headerType = "userFeed"/>
-            <PostListing posts = {loadedPosts} title={"Page du Post"} />
-            <PostDeleteInterface post = {loadedPosts} />
-            <CommentListing comments={loadedComments}/>
+            <PostListing posts = {ApiCtx.loadedPosts} title={"Page du Post"} />
+            <PostDeleteInterface post = {ApiCtx.loadedPosts} />
+            <CommentListing comments={ApiCtx.loadedComments}/>
         </div>
     )
 } 

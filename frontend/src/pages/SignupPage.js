@@ -12,7 +12,7 @@ import Header from "../components/layout/Header";
 
 function SignupPage(){
     const title= "Création du compte utilisateur"
-    const [message, changeMessage] = useState("...")
+    const [message, changeMessage] = useState()
     const history = useHistory() //history est est utilisée pour la navigation programmatique
 
     function handleAddUser(user) {

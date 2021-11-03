@@ -40,9 +40,9 @@ function PostDeleteInterface(props){
     {    
     return(
             <div className="container">
-                <div className="col col-md-6 mx-auto my-5">
-                    <button className="text-white bg-danger" onClick={deletePostHandler} >SUPPRIMER CE POST</button>
-                </div>
+                    <div className="col col-md-6 mx-auto my-5">
+                        <button className="text-white bg-danger" onClick={deletePostHandler} >SUPPRIMER CE POST</button>
+                    </div>
             </div>
         )
     }

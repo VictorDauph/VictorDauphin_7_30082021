@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom";
 
 //importation des interfaces de modification et suppression des commentaires
 import CommentDeleteInterface from "../layout/commentDeleteInterface";
+import CommentModifyButton from "../layout/commentModifyButton";
+import UpdateCommentForm from "../forms/updateCommentForm";
 
 //modifier la liste des comments avec APIContext
 function CommentItem(props){
@@ -21,10 +23,13 @@ function CommentItem(props){
 
     //Message sert à afrficher les messages d'erreurs en provenance de l'API
     const [message, changeMessage] = useState("")
-    const content= props.content
+    const [content,setContent]= useState(props.content)
     const commentId= props.commentId
     const userId= props.userId
     console.log("comment item", props)
+
+    //Variable d'apparition de l'interface de modification d'un commentaire
+    const [isModifying,setIsModifying]= useState(false)
 
     const AuthCtx= useContext(AuthContext)
 
@@ -85,19 +90,35 @@ function CommentItem(props){
         history.push("/userFeed")
     }
 
+    //Cette fonction sert à faire disparaître un commentaire quand il est supprimé
+    const [display,setDisplay]=useState("")
+    function eraseComment(){
+        setDisplay("d-none")
+    }
+
+    
+
     return (
-        <div>
+        <div className={display}>
             <Card className="col col-md-6 mx-auto bg-secondary py-3 px-3">
                 <Card.Text className="text-light">
-                <p className="mini">
-                    crée le: {props.createdAt} par 
-                    <span className="text-primary cursor-pointer" onClick={goToUserFeed}>  {userId} </span>
-                </p>
+                    <p className="mini">
+                        crée le: {props.createdAt} par 
+                        <span className="text-primary cursor-pointer" onClick={goToUserFeed}>  {userId} </span>
+                    </p>
                     <p>{content}</p>
                     <p>
                         {/* Affichage de l'interface de signalement/désignalement */}
                         <span className="text-danger mini mx-1"> {flagged? isAdmin? <i className="fas fa-flag cursor-pointer text-primary" onClick={setUnflaggedHandler}> Contenu acceptable </i> : <i className="fas fa-flag"> contenu signalé</i> : <i class="far fa-flag cursor-pointer" onClick={setFlaggedHandler}> signaler ce contenu</i>} </span></p>
-                        <CommentDeleteInterface {...props}/>
+                        {/*Le formulaire de modification apparaît quand isModifying=true, quand isModifying=false apparition des boutons. */}
+                        {isModifying? <UpdateCommentForm  {...props} setIsModifying={setIsModifying} setContent={setContent} changeMessage={changeMessage} />: 
+                        <div className="container">
+                            <div className="row">
+                                <CommentModifyButton {...props} setIsModifying={setIsModifying}/> 
+                                <div className="col"></div>
+                                <CommentDeleteInterface {...props} eraseComment={eraseComment}/>
+                            </div>
+                        </div>}
                 </Card.Text>
             </Card>
             <p className="text-danger col col-md-6 mx-auto">{message}</p>

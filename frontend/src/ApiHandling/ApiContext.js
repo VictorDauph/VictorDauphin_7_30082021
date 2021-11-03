@@ -27,13 +27,11 @@ const ApiContext = createContext({
     setloadedComments:() =>{},
     loadedPosts:[],
     loadedComments:[],
-    updatedComments:[]
 });
 
 export function ApiContextProvider(props) { //à chaque fois que FetchContext est modifié, son state sera modifié en temps réel par ce composant. Ce composant passe les fonctions qu'il contient et les rend accessible au reste du projet.
     const [loadedPosts, setLoadedPosts] = useState(allPostsDummy); //loadedMeetups est un array retourné par fetch depuis l'API des meetups que l'on souhaite afficher. Il est vide par défaut.
     const [loadedComments,setloadedComments]=useState([])
-    const [updatedComments,setUpdatedComments]=useState([])
     const formatedPosts= []
 
     const AuthCtx = useContext(AuthContext)
@@ -114,9 +112,8 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
         getPosts:getPosts,
         likePost:likePost,
         setloadedComments,
-        setUpdatedComments,
         loadedPosts:loadedPosts,
-        loadedComments:loadedComments
+        loadedComments:loadedComments,
     }; 
     
         return (<ApiContext.Provider value={context}> {/* Ce bout de code sert à passer le contenu de favorite context au reste du projet. */}
