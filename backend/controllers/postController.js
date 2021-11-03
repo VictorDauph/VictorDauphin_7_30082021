@@ -144,13 +144,6 @@ exports.getOnePost = (req, res, next) =>{
         res.status(200).json(singlePost)//puis on renvoie l'objet singlePost où toutes les données sont stockées
       }).catch(error => res.status(404).json({"message":error}))
       )
-
-
-
-    
-
-    //res.status(200).json(singlePost)
-    //.catch(error => res.status(404).json({"message":error}));
   };
 
 // Fonction de récupération de tous les posts d'un utilisateur

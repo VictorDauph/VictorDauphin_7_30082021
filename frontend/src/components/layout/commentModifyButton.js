@@ -19,11 +19,11 @@ function CommentModifyButton(props){
     const isAdmin = AuthCtx.isAdmin();
     const postUserId=props.userId
 
-    function toggleUpdateInterface(event)
-        {   
+    function toggleUpdateInterface(){   
             props.setIsModifying(true)
         }
     
+    //le bouton modifier ne doit apparaître que si l'utilisateur est un admin ou le propriétaire du commentaire
     if( isAdmin || loggedUserId==postUserId)
     {    
     return(

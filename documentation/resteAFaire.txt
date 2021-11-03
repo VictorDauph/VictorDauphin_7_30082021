@@ -9,14 +9,19 @@
 -page post:
 -Modif API pour récupérer un post et ses commentaire /OK\
 - Supprimer Post /OK\
--Afficher, créer supprimer commentaires
+-Afficher, créer supprimer commentaires /OK\
 gestion des commentaires: ajout/suppression/modif/flag
 -Vérifier suppression des images à la suppression des posts /OK\
 -Vérifier suppression des images à la suppression de l'utilisateur /OK\
 
+
+
 -interface Admin:
 ajout d'un bouton admin dans le header des admins
-affichage des posts flaggés
-possibilité de supprimer posts et commentaires
+affichage des posts flaggés et commentaires flaggées (avec lien vers la page single post concernée)
+possibilité de supprimer posts et commentaires /OK\
 
 - modifs BDD Arsène
+
+bugs:
+-problème affichage pouces sur single psot

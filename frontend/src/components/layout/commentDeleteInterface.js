@@ -23,26 +23,8 @@ function CommentDeleteInterface(props){
     const isAdmin = AuthCtx.isAdmin();
     const commentId=props.commentId
     const postUserId=props.userId
-    //tableau des commentaires du post chargés depuis le contexte de l'Api:
-    const loadedComments=ApiCtx.loadedComments
 
-
-    let commentIndex = -1
-    console.log("local loaded comments",loadedComments)
-
-    //bugs avec localLoadedComments.indexOf(), on utilise donc cette fonction pour trouver l'index du post à supprimer.
-    function findIndexOfComment(){
-        loadedComments.map(loadedComment=>{
-            const index = loadedComments.indexOf(loadedComment)
-            if(loadedComment.commentId == commentId){
-                commentIndex=index
-                console.log("found index :", commentIndex, "of Comment :", commentId)
-                
-            }
-        })
-    }
-
-
+    //Cette fonction envoie la requête fecth pour supprimer le commentaire auquel le bouton appartient
     function deleteCommentHandler(event)
         {   
             event.preventDefault()
@@ -53,17 +35,11 @@ function CommentDeleteInterface(props){
                 fetch(`http://localhost:4000/api/comment/${commentId}`,init).then(res => res.json()).then( ans => {
                     alert(ans.message)
                     props.eraseComment()
-                    /*
-                    findIndexOfComment()
-                    loadedComments.splice(commentIndex,1)
-                    ApiCtx.setUpdatedComments(loadedComments) //Ici y'a un truc pas net! Essayer d'utiliser un state en local?
-                    console.log("pdated comments after delete :", ApiCtx.updatedComments )
-                    */
-
                 })
             })
         }
     
+    //le bouton supprimer ne doit apparaître que si l'utilisateur est un admin ou le propriétaire du commentaire
     if( isAdmin || loggedUserId==postUserId)
     {    
     return(

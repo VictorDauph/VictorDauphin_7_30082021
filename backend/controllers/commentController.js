@@ -1,18 +1,19 @@
 //Cette ligne importe les schéma de donnée Posts
 const Comment= require('../models/comment');
 
-//cette fonction sert à créer des commentaires.
+//cette fonction sert à créer des commentaires. Elle retourne le post concerné et les commentaires associés mis à jour, à la a
 exports.createComment = (req, res, next) =>{
-    console.log("demande de création de commentaire autorisée")
-      const commentObject = req.body;
-      console.log("création du commentaire", commentObject)
-      const comment = new Comment ({
-        ...commentObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet commentaire et des données contenues dans la requête.
-      });
-      comment.save() //Save est une méthode des schémas de données qui sauvegarde un objet dans la base.
-      .then(() => res.status(201).json({message: 'commentaire enregistré'}))
-      .catch(error => res.status(400).json({error}));  
-    };
+  console.log("demande de création de commentaire autorisée")
+    const commentObject = req.body;
+    console.log("création du commentaire", commentObject)
+    const comment = new Comment ({
+      ...commentObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet commentaire et des données contenues dans la requête.
+    });
+    comment.save() //Save est une méthode des schémas de données qui sauvegarde un objet dans la base.
+    .then(() => res.status(201).json({message: 'commentaire enregistré'}))
+    .catch(error => res.status(400).json({error}));  
+  };
+
 
     //fonction de suppression d'un commentaire
   exports.deleteComment = (req, res, next) =>{
