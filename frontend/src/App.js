@@ -9,9 +9,11 @@ import NewPost from "./pages/newPost";
 import MyFeed from "./pages/myFeed";
 import UserFeed from "./pages/UserFeed";
 import SinglePost from "./pages/singlePost";
+import AdminPanel from "./pages/adminPanel";
 
 //importation du composant de protection des routes
 import ProtectedRoute from "./authentification/protectedRoutes";
+import AdminRoute from "./authentification/adminRoute";
 
 //function App qui sert à gérer l'affichage des pages, du header et le router
 function App() {
@@ -25,6 +27,7 @@ function App() {
           <ProtectedRoute path="/myFeed" exact component={MyFeed}  />
           <ProtectedRoute path="/userFeed" exact component={UserFeed} />
           <ProtectedRoute path="/singlePost" exact component={SinglePost} />
+          <AdminRoute path="/adminPanel" exact component={AdminPanel} />
         </Switch>
     </div>
     );

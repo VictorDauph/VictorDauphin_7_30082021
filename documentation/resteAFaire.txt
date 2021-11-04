@@ -17,11 +17,13 @@ gestion des commentaires: ajout/suppression/modif/flag
 
 
 -interface Admin:
-ajout d'un bouton admin dans le header des admins
-affichage des posts flaggés et commentaires flaggées (avec lien vers la page single post concernée)
+ajout d'un bouton admin dans le header des admins/OK\
+affichage des posts flaggés et commentaires flaggées (avec lien vers la page single post concernée)/OK\
 possibilité de supprimer posts et commentaires /OK\
 
 - modifs BDD Arsène
 
 bugs:
 -problème affichage pouces sur single psot
+-affichage nouveaux commentaires (peut être avec une nouvelle instance de Post listing et un tableau de nouveaux commentaires?)
+affichage date

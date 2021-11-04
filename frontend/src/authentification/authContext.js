@@ -84,11 +84,18 @@ export function AuthContextProvider(props){
 
         //Cette fonction retourne true si l'utilisateur authentifié est un admin et false dans tous les autres cas.
         function isAdmin(){
-            const userDatas = JSON.parse( localStorage.getItem("userDatas"))
-            if (userDatas.role == "admin")
-                {return true}
+            if(isAuthenticatedHandler()){//on vérifie d'abord que l'utilisateur est loggé
+                const userDatas = JSON.parse( localStorage.getItem("userDatas"))
+                if (userDatas.role == "admin") // Puis on vérifie qu'il a bien le rôle admin.
+                    {return true}
+                else
+                    {return false}
+            }
             else
-                {return false}
+                {return false} 
+
+
+
         }
 
         //Cette fonction retourne les données utilisateur stockées dans le local storage

@@ -82,7 +82,7 @@ function SinglePost(){
     return(
         <div>
             <Header headerType = "userFeed"/>
-            <PostListing posts = {ApiCtx.loadedPosts} title={"Page du Post"} />
+            <PostListing posts = {ApiCtx.loadedPosts} title={"Page du Post"} adminPanel={false} />
             <PostDeleteInterface post = {ApiCtx.loadedPosts} />
             <div className="col col-md-6 mx-auto bg-secondary py-3 px-3">
                 <CommentForm  handleComment={createComment} buttonText={"Commenter !"} label="Commentez" />

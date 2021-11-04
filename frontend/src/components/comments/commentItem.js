@@ -4,7 +4,6 @@ import {useContext, useState, useEffect } from "react";
 
 //importaion du contexte d'authentification
 import {AuthContext} from "../../authentification/authContext";
-import ApiContext from "../../ApiHandling/ApiContext";
 
 import {Card} from 'react-bootstrap'
 
@@ -33,7 +32,6 @@ function CommentItem(props){
     const [isModifying,setIsModifying]= useState(false)
 
     const AuthCtx= useContext(AuthContext)
-    const ApiCtx= useContext(ApiContext)
 
     //l'affichage du drapeau de signalement de contenu est un state car il doit se modifier en réaction au clic de signalement.
     let isFlagged= props.flagged
@@ -86,6 +84,13 @@ function CommentItem(props){
         .catch(err => changeMessage(err.message))
     }
     
+    //Cette fonction permet de naviguer vers le post qui contient le commentaire.
+    function gotoSinglePost(){
+        console.log("gotoSinglePost", props.postId)
+        localStorage.setItem("SinglePost",props.postId)
+        history.push("/singlePost")
+    }
+
     function goToUserFeed(){
         console.log("goToTuserFeed", props.userId)
         localStorage.setItem("userFeed",props.userId)
@@ -97,11 +102,6 @@ function CommentItem(props){
     function eraseComment(){
         setDisplay("d-none")
     }
-
-    //tableau des commentaires du post chargés depuis le contexte de l'Api:
-    let loadedComments=ApiCtx.loadedComments
-    //commentIndex est l'index du commentaire dans loadedComments, il est déterminé pas FindIndexOfComments
-    let commentIndex=-1
 
     //récupération de l'Id de l'user loggé
     let loggedUserId = null
@@ -130,11 +130,14 @@ function CommentItem(props){
             .then(()=>{setIsModifying(false) })//fermeture du formulaire
         })
     }
+    console.log("item adminPanel?", props.adminPanel)
         
     return (
         <div className={display}>
             <Card className="col col-md-6 mx-auto bg-secondary py-3 px-3">
                 <Card.Text className="text-light">
+                    {/* la balise de navigation vers le post ne doit s'afficher que dans panelAdmin.*/}
+                    {props.adminPanel?<p className="mini">Ce commentaire est rattaché au post : <span className="text-primary cursor-pointer" onClick={gotoSinglePost}>{props.postId}</span> </p>:null} 
                     <p className="mini">
                         crée le: {props.createdAt} par 
                         <span className="text-primary cursor-pointer" onClick={goToUserFeed}>  {userId} </span>

@@ -17,6 +17,8 @@ function CustomDropdownMenu(props){
     const history = useHistory() //history est est utilisée pour la navigation programmatique
     const AuthCtx = useContext(AuthContext) //Authcontext contient les variables fonctions liées au login, logout et vérification d'authentification pour gérer les Protected Routes
     const redirection = () => {history.push("/");} //Cette redirection ramène sur la page de login après un logout.
+    
+    
 
     //Fonction qui appelle la fonction de logout
     function logoutHandler(){
@@ -100,6 +102,20 @@ function CustomDropdownMenu(props){
         )
     }
 
+
+    function DropDownItemAdminPanel(){
+        const isAdmin=AuthCtx.isAdmin()
+        console.log("isAdmin :", isAdmin)
+        if(isAdmin){
+            return(
+                <Dropdown.Item>
+                    <Link className="text-decoration-none" to="/adminPanel">Paneau d'administration</Link>
+                </Dropdown.Item>
+            )
+        }
+        else return(null)
+    }
+
     //Les blocs conditionnels if, retournent des boutons différents pour des pages différentes
 
     if(props.headerType=="login"){   
@@ -140,8 +156,8 @@ function CustomDropdownMenu(props){
                     <DropDownItemCreatePost />
                     <DropDownItemMyFeed />
                     <DropDownItemLogout />
+                    <DropDownItemAdminPanel />
                     <DropDownItemDeleteAccount />
-                    
                 </Dropdown.Menu>
             </Dropdown> 
                 )
@@ -157,6 +173,7 @@ function CustomDropdownMenu(props){
                         <DropDownItemFeed />
                         <DropDownItemMyFeed />
                         <DropDownItemLogout />
+                        <DropDownItemAdminPanel />
                         <DropDownItemDeleteAccount />
                     </Dropdown.Menu>
                 </Dropdown> 
@@ -173,6 +190,7 @@ function CustomDropdownMenu(props){
                             <DropDownItemCreatePost />
                             <DropDownItemFeed />
                             <DropDownItemLogout />
+                            <DropDownItemAdminPanel />
                             <DropDownItemDeleteAccount />
                         </Dropdown.Menu>
                     </Dropdown> 
@@ -191,11 +209,30 @@ function CustomDropdownMenu(props){
                                 <DropDownItemFeed />
                                 <DropDownItemMyFeed />
                                 <DropDownItemLogout />
+                                <DropDownItemAdminPanel />
                                 <DropDownItemDeleteAccount />
                             </Dropdown.Menu>
                         </Dropdown> 
                             )
                         }
+
+                    else if (props.headerType=="adminPanel"){
+                        //Menu dropdown page adminPanel  
+                        return(
+                            <Dropdown>
+                                <Dropdown.Toggle className="btn btn-secondary dropdown-toggle">
+                                    <i className="fas fa-bars"></i> 
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu className="bg-secondary">
+                                    <DropDownItemCreatePost />
+                                    <DropDownItemFeed />
+                                    <DropDownItemMyFeed />
+                                    <DropDownItemLogout />
+                                    <DropDownItemDeleteAccount />
+                                </Dropdown.Menu>
+                            </Dropdown> 
+                        )
+                    }
     else{
         return(
             <div>nul</div>

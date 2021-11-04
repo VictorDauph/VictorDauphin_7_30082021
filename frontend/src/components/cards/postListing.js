@@ -1,3 +1,5 @@
+//Cette fonction sert à afficher des listes de posts.
+
 import PostItem from "./postItem";
 
 function PostListing(props) {
@@ -16,7 +18,7 @@ function PostListing(props) {
         </main>
         )
     }
-    if(postsProps.length <= 0){
+    if(postsProps.length <= 0){ //Le fait d'utiliser ce bloc conditionnel empêche des bugs liés à l'affichage et au mapping de listes vides
         return(
             <main className="container text-primary my-5">
                 Il n'y a aucun post à afficher
