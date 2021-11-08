@@ -57,8 +57,9 @@ function CommentItem(props){
     //useEffect permet de redéfinir le contenu du post à chaque fois qu'un commentaire est crée
 
     useEffect(()=>{
+        if (isModified == false){
         console.log("comment content effect", propsContent, content, newContent,isModified)
-        setContent(propsContent)
+        setContent(propsContent)}
     },[props.content])
 
     useEffect(()=>{
