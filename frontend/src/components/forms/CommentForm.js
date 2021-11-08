@@ -3,7 +3,7 @@
 //react-bootstrap permet d'utiliser des composant spécifiques pour les Form et les Button
 import {Form, Button} from "react-bootstrap"
 //useRef permet de lire le contenu d'un input.
-import {useRef} from "react"; 
+import {useEffect, useRef} from "react"; 
 
 
 function CommentForm(props){
@@ -14,6 +14,8 @@ function CommentForm(props){
         const commentValue = commentInput.current.value
         props.handleComment(event,commentValue)
     }
+
+
   
     
     

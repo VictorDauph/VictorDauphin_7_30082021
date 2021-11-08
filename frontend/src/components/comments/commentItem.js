@@ -23,13 +23,20 @@ function CommentItem(props){
 
     //Message sert à afrficher les messages d'erreurs en provenance de l'API
     const [message, changeMessage] = useState("")
-    const [content,setContent]= useState(props.content)
+    
+    let propsContent= props.content
+    const [content,setContent]= useState(propsContent)
+    let newContent=content
     const commentId= props.commentId
     const userId= props.userId
+
+
     console.log("comment item", props)
+    console.log("comment content", propsContent, content,newContent)
 
     //Variable d'apparition de l'interface de modification d'un commentaire
     const [isModifying,setIsModifying]= useState(false)
+    const [isModified,setIsModified]= useState(false) //Si is modified est true, il faut afficher la valeur modifiée, sinon la valeur propsContent
 
     const AuthCtx= useContext(AuthContext)
 
@@ -46,6 +53,19 @@ function CommentItem(props){
     useEffect(() =>{
         setFlagged(isFlagged)
     },[isFlagged])
+
+    //useEffect permet de redéfinir le contenu du post à chaque fois qu'un commentaire est crée
+
+    useEffect(()=>{
+        console.log("comment content effect", propsContent, content, newContent,isModified)
+        setContent(propsContent)
+    },[props.content])
+
+    useEffect(()=>{
+        if (isModified){
+        setContent(newContent)
+        console.log("comment content effect 2", propsContent, content, newContent,isModified)}
+    },[isModified])
 
     //Cette fonction sert à flagger les commentaires
     function setFlaggedHandler(){
@@ -113,7 +133,12 @@ function CommentItem(props){
     //Cette fonction sert à modifier un commentaire via le formulaire CommentForm
     function updateComment(event,commentValue){
         event.preventDefault(); //empêche le rechargement de la page. comportement pas défaut du bouton
-        
+
+        //on modifie la valeur de newContent afin qu'à l'activation de useEffect la valeur rechargée soit la nouvelle valeure du commentaire
+        newContent=commentValue
+        setContent(newContent)
+        setIsModified(true)
+        console.log("comment content updated", propsContent, content)
         //construction du body de la requête fetch
         const requestBody = {
             content:commentValue,

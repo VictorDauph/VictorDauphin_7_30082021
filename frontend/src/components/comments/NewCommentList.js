@@ -3,23 +3,21 @@ import { useState,useEffect } from "react"
 
 import CommentItem from "./commentItem"
 
-function CommentListing(props) {
+function NewCommentListing(props) {
     const commentsProps= props.comments
     const [comments,setComments]=useState([])
 
     useEffect(()=>{
         setComments(commentsProps)
+        console.log("new comments props", commentsProps)
     })
     
 
 
     console.log("List adminPanel?", props.adminPanel)
     if (commentsProps.length>0){
-        const sortedComments = comments.reverse()
+        const sortedComments = comments
         console.log("sorted comments", sortedComments)
-        
-
-        
         return (
             <main className="container">
                     <h2 className="text-primary col col-md-6 mx-auto my-5">{props.title}</h2>
@@ -30,12 +28,8 @@ function CommentListing(props) {
         )
     }
     else{//Le fait d'utiliser ce bloc conditionnel empêche des bugs liés à l'affichage et au mapping de listes vides
-        return(
-            <main className="container text-primary my-5">
-                Il n'y a aucun commentaire à afficher
-            </main>
-        )
+        return(null)
     }
 }
 
-export default CommentListing;
+export default NewCommentListing;

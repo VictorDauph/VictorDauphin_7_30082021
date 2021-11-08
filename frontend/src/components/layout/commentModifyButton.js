@@ -3,7 +3,7 @@ import { useContext,useState,useEffect } from "react";
 import { AuthContext } from "../../authentification/authContext";
 
 function CommentModifyButton(props){
-    console.log("delete interface comment item", props)
+    //console.log("delete interface comment item", props)
     const AuthCtx = useContext(AuthContext)
 
 

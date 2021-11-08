@@ -7,7 +7,7 @@ import ApiContext from "../../ApiHandling/ApiContext";
 
 
 function CommentDeleteInterface(props){
-    console.log("delete interface comment item", props)
+    //console.log("delete interface comment item", props)
     const AuthCtx = useContext(AuthContext)
     const ApiCtx = useContext(ApiContext)
 

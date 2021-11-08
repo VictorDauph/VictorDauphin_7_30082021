@@ -10,7 +10,12 @@ exports.createComment = (req, res, next) =>{
       ...commentObject, //Cet opérateur est capable de créer automatiquement un objet à partir de l'objet commentaire et des données contenues dans la requête.
     });
     comment.save() //Save est une méthode des schémas de données qui sauvegarde un objet dans la base.
-    .then(() => res.status(201).json({message: 'commentaire enregistré'}))
+    .then(() => {
+    comment.reload()
+   } ).then(()=>{
+     console.log("new comment Id :",comment.commentId)
+     res.status(201).json({message: 'commentaire enregistré',commentId:comment.commentId})
+    })
     .catch(error => res.status(400).json({error}));  
   };
 

@@ -22,12 +22,9 @@ function LikeInterface(props){
     let usersUpvotesProps = props.usersUpvotes
     let usersDownvotesProps= props.usersDownvotes
     //On récupère l'UserId qui a servi à l'authentification de l'utilisateur et on le stock dans AuthentifiedUserId
-    let authentifiedUserId = null
-    AuthCtx.authentifiedUserDatas().then( datas=>{
-       authentifiedUserId = datas.id
-    }).catch(err=>{changeMessage(err.message)})
-   
+   const [authentifiedUserId,setAuthentifiedUserId]=useState(null)
 
+   
     //hasUserLikedPost() est une fonction qui doit retourner 0 si l'utilisateur est neutre, 1 s'il a liké le post, -1 s'il l'a disliké.
     const ApiCtx = useContext(ApiContext)
     //stockage des arrays de likes et dislikes dans des states
@@ -37,29 +34,36 @@ function LikeInterface(props){
     let isLiked = 2
     const [UserHasLikedPost,setUserHasLikedPost] = useState();
 
+
     //La valeur retournée est stockée dans UserHasLikedPost
     function hasUserLikedPost(){
-        console.log("user Upvotes array for post",props.postId, usersUpvotesProps, "user Id:", authentifiedUserId)
-        if(usersUpvotesProps.includes(authentifiedUserId)){
-            isLiked=1
-            setUserHasLikedPost(isLiked)
-            console.log("post liked :", props.postId)
-        }
-        else if(usersDownvotesProps.includes(authentifiedUserId)){
-            isLiked=-1
-            setUserHasLikedPost(isLiked)
-            console.log("post disliked :", props.postId)
-        }
-        else{
-            isLiked=0
-            setUserHasLikedPost(isLiked)
-            console.log("post not liked :", props.postId)
-        }
+        
+        AuthCtx.authentifiedUserDatas().then( datas=>{
+            setAuthentifiedUserId(datas.id)
+            console.log("identification", authentifiedUserId)
+         }).catch(err=>{changeMessage(err.message)}).then(()=>{
+            console.log("user Upvotes array for post",props.postId, usersUpvotesProps, "user Id:", authentifiedUserId)
+            if(usersUpvotesProps.includes(authentifiedUserId)){
+                isLiked=1
+                setUserHasLikedPost(isLiked)
+                console.log("post liked :", props.postId)
+            }
+            else if(usersDownvotesProps.includes(authentifiedUserId)){
+                isLiked=-1
+                setUserHasLikedPost(isLiked)
+                console.log("post disliked :", props.postId)
+            }
+            else{
+                isLiked=0
+                setUserHasLikedPost(isLiked)
+                console.log("post not liked :", props.postId)
+            }
+         })
     }
 
    
     function likePostHandler(){
-        console.log("liking post")
+
         //requête POST pour ajout de like à la BDD
         ApiCtx.likePost(1,props.postId,authentifiedUserId).then((data)=>{
                     //modification du pouce
@@ -68,6 +72,7 @@ function LikeInterface(props){
                     //modification du nombre de likes
                     usersUpvotesProps.push(authentifiedUserId)
                     changeMessage(data.message)
+                    console.log("liking post", authentifiedUserId)
         }).catch( err=>{
             changeMessage(err.message)
         })
@@ -114,15 +119,14 @@ function LikeInterface(props){
         })
     }
 
-    useEffect(()=>{
-        hasUserLikedPost()
-        setUserHasLikedPost(isLiked)
-    },[])
     //useEffect permet de prendre en compte la modification des variables au fur et à mesure.
     useEffect(()=>{
         hasUserLikedPost()
-        setUserHasLikedPost(isLiked)
-    },[usersUpvotesProps,usersDownvotesProps,isLiked])
+    })
+
+
+
+
 
     if(UserHasLikedPost==1)
         return(

@@ -31,8 +31,8 @@ const ApiContext = createContext({
 
 export function ApiContextProvider(props) { //à chaque fois que FetchContext est modifié, son state sera modifié en temps réel par ce composant. Ce composant passe les fonctions qu'il contient et les rend accessible au reste du projet.
     const [loadedPosts, setLoadedPosts] = useState(allPostsDummy); //loadedMeetups est un array retourné par fetch depuis l'API des meetups que l'on souhaite afficher. Il est vide par défaut.
-    const [loadedComments,setloadedComments]=useState([])
-    const formatedPosts= []
+    const [loadedComments, setLoadedComments] = useState([])
+    let formatedPosts= []
 
     const AuthCtx = useContext(AuthContext)
 
@@ -55,8 +55,8 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
                             usersDownvotes: JSON.parse(post.usersDownvotes),
                             createdAt: post.createdAt
                         }
-                        formatedPosts.push(formatedPost)
-                        console.log("formated Post", formatedPost)
+                        formatedPosts= formatedPosts.concat([formatedPost])
+                        console.log("formated Posts", formatedPosts,"formated Post", formatedPost)
                 }
             )
             setLoadedPosts(formatedPosts)
@@ -65,12 +65,14 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
         AuthCtx.initHeadersForFetch().then( (init)=>{
             function formateComments(posts){
                 //création d'un array de comments stocké dans loadedComments. Les commentaires ne sont affichés que dans la page singlePost et ne sont présents dans la réponse de l'API que dans les requêtes qui concernent singlePost.
+                setLoadedComments(posts.comments)
                 console.log("fetched comments :", posts.comments)
-                setloadedComments(posts.comments)
+
             }
             console.log("fetching posts", init.headers.Authorization)     
             fetch(getUri, init).then(res => res.json()).then(
                 posts => {
+                    console.log("fetched posts to formate", posts)
                     formatePosts(posts)
                     if(posts.comments) //si la réponse de la requête contient des commentaires on les formate et on els stock dans loaded comments, s'il n'yen a pas alors il ne faut pas éxécuter ce code pour éviter les bugs.
                     {
@@ -111,7 +113,6 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
     const context = {
         getPosts:getPosts,
         likePost:likePost,
-        setloadedComments,
         loadedPosts:loadedPosts,
         loadedComments:loadedComments,
     }; 
