@@ -9,13 +9,16 @@ import {useEffect, useRef} from "react";
 function CommentForm(props){
     //variables de lecture des inputs
     const commentInput = useRef()
+    const isModifying=props.isModifying
 
     function handleSubmit(event){
         const commentValue = commentInput.current.value
         props.handleComment(event,commentValue)
     }
 
-
+    function handleCancel(){
+        props.setIsModifying(false)
+    }
   
     
     
@@ -26,9 +29,14 @@ function CommentForm(props){
                         <Form.Label>{props.label}</Form.Label>
                         <Form.Control type="text" as="textarea" placeholder={props.label} ref={commentInput} />
                     </Form.Group>
-                    <Button className="text-dark bg-primary border-0" type="submit">
-                        {props.buttonText}
-                    </Button>
+                    <div className="d-flex justify-content-around">
+                        <Button className="text-dark bg-primary border-0" type="submit">
+                            {props.buttonText}
+                        </Button>
+                        {props.isModifying?<Button onClick={handleCancel} className="text-dark bg-primary border-0">
+                            annuler
+                        </Button>:null}
+                    </div>
                 </Form>
             </div>
     )

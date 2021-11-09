@@ -25,5 +25,5 @@ possibilité de supprimer posts et commentaires /OK\
 
 bugs:
 -problème affichage pouces sur single psot /OK\
--affichage nouveaux commentaires (peut être avec une nouvelle instance de Post listing et un tableau de nouveaux commentaires?)
-affichage date
+-affichage nouveaux commentaires (peut être avec une nouvelle instance de Post listing et un tableau de nouveaux commentaires?), revue de bugs en cours
+affichage date /OK\

@@ -30,11 +30,8 @@ function CommentListing(props) {
         )
     }
     else{//Le fait d'utiliser ce bloc conditionnel empêche des bugs liés à l'affichage et au mapping de listes vides
-        return(
-            <main className="container text-primary my-5">
-                Il n'y a aucun commentaire à afficher
-            </main>
-        )
+        return(null)
+        
     }
 }
 

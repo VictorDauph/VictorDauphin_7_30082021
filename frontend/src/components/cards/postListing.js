@@ -7,7 +7,7 @@ function PostListing(props) {
     const postsProps = props.posts
 
     if(props.posts.length >0){
-        const sortedPosts = postsProps
+        const sortedPosts = postsProps.reverse()
         return (
         <main className="container">
                 <h2 className="text-primary col col-md-6 mx-auto my-5">{props.title}</h2>

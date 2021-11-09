@@ -173,7 +173,7 @@ function CommentItem(props){
                         {/* Affichage de l'interface de signalement/désignalement */}
                         <span className="text-danger mini mx-1"> {flagged? isAdmin? <i className="fas fa-flag cursor-pointer text-primary" onClick={setUnflaggedHandler}> Contenu acceptable </i> : <i className="fas fa-flag"> contenu signalé</i> : <i class="far fa-flag cursor-pointer" onClick={setFlaggedHandler}> signaler ce contenu</i>} </span></p>
                         {/*Le formulaire de modification apparaît quand isModifying=true, quand isModifying=false apparition des boutons. */}
-                        {isModifying? <CommentForm  {...props} handleComment={updateComment} buttonText={"Modifier Commentaire !"} label="Modifiez votre commentaire" />: 
+                        {isModifying? <CommentForm  {...props} handleComment={updateComment} isModifying={isModifying} setIsModifying={setIsModifying} buttonText={"Modifier Commentaire !"} label="Modifiez votre commentaire" />: 
                         <div className="container">
                             <div className="row">
                                 <CommentModifyButton {...props} setIsModifying={setIsModifying}/> 
