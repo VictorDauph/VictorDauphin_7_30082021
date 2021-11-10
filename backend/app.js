@@ -42,18 +42,6 @@ app.use((req, res, next) => {
   next();
 }); 
 
-/*
-//ce middleware génère des headers pour gérer la sécurité CORS
-app.use((req, res, next) => {
-  console.log("fabrication headers");
-
-    origin: 'http://localhost:3000',
-    cors: true
-
-  console.log("headers frabriqués")
-  next();
-});
-*/
 
 //Ce middleware parse le body de toutes les requêtes en JSON pour être utilisables.
 app.use(

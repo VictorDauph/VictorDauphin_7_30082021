@@ -106,12 +106,3 @@ exports.delete = (req, res, next) =>{
     .catch(error => res.status(500).json({message:error})); 
   }; 
 
-  //fonction de récupération d'un email utilisateur
-exports.retrieveUser = (req, res, next) =>{
-    console.log("retrieving user from id: ", req.params.userToRetrieve )
-    User.findOne({where:{userId: req.params.userToRetrieve}})
-    .then( user => {
-        console.log("user Id:", user.userId, "user email :", user.email )
-        res.status(201).json({email:user.email})
-    }).catch(error => res.status(404).json({message:"utilisateur introuvable"}));
-}
