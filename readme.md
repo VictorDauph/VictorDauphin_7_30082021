@@ -10,6 +10,7 @@ A) Création de la base de données
 B)Cloner le projet
 C)Installer et configuer l'API
 D)Installer le serveur REACT
+
 -----------------------------------------------------------------------------------------------------------
 A) Création base de données:
 
@@ -19,6 +20,7 @@ A) Création base de données:
 
 3) créer un utilisateur et lui donner tous les droits sur cette base de données (username:USERNAME, password:PASSWORD)*
 *les noms indiqués sont des exemples, vous pouvez choisir les noms et mots de passes à votre convenance.
+
 -------------------------------------------------------------------------------------------------------------------
 B) Cloner l'application
 1) Créer un repo git dans le dossier de votrer choix:
@@ -28,6 +30,7 @@ B) Cloner l'application
 2) cloner le projet avec le terminal depuis le dossier du projet:
 
 ./: git pull https://github.com/VictorDauph/VictorDauphin_7_30082021.git
+
 ------------------------------------------------------------------------------------------------------------------
 C)Installer et configuer l'API
 
@@ -79,6 +82,7 @@ si le serveur s'est bien lancé, votre terminal affiche:
 Listening on port 3000
 Executing (default): SELECT 1+1 AS result
 INFO - Database connected.
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 D)Installer le serveur REACT(depuis un nouveau terminal)
 
@@ -92,6 +96,7 @@ npm start
 
 Au lancement du serveur une nouvelle page devrait s'ouvrir sur votre navigateur par défaut et afficher la page de login de l'appication.
 Cette étape peut prendre quelques minutes.
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Relancer l'application une fois installée:
