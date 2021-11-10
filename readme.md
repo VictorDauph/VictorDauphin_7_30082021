@@ -7,8 +7,11 @@ La base de données utilisée pour ce projet est une base de donnée MYSQL. L'AP
 
 Pour faire fonctionner cette application en local il faut suivre les étapes suivantes:
 A) Création de la base de données
+
 B)Cloner le projet
+
 C)Installer et configuer l'API
+
 D)Installer le serveur REACT
 
 -----------------------------------------------------------------------------------------------------------
@@ -19,10 +22,12 @@ A) Création base de données:
 2) Créer une Base de données MySql (name:BDDNAME)*
 
 3) créer un utilisateur et lui donner tous les droits sur cette base de données (username:USERNAME, password:PASSWORD)*
+
 *les noms indiqués sont des exemples, vous pouvez choisir les noms et mots de passes à votre convenance.
 
 -------------------------------------------------------------------------------------------------------------------
 B) Cloner l'application
+
 1) Créer un repo git dans le dossier de votrer choix:
 
 ./: git init
