@@ -28,3 +28,16 @@ i
     min-width: 4rem;
     margin-right: 2%;
 }
+
+//accessibilité
+:focus
+{
+    border: solid 3px $primary;
+}
+
+.thumb-button, .flag-button, .user-button
+{
+    font-size: 1.4em;
+    vertical-align:baseline ;
+    padding: 0 0.4em;
+}

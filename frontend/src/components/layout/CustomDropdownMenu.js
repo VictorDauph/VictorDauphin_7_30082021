@@ -43,61 +43,66 @@ function CustomDropdownMenu(props){
             })
         })            
     } 
+
+    function navigate(Url){
+        history.push(Url)
+    }
+
     
 
     //Les fonction DropDownItem... sont des boutons utilisés dans les différents dropDownMenus des headers des différentes pages. Ils sont codés séparément car utilisés différemment selon les pages
     function DropdownItemSignup(){
         return(
-            <Dropdown.Item>
-                <Link className="text-decoration-none" to="/signup">Inscription d'un nouvel utilisateur</Link>
+            <Dropdown.Item className="text-decoration-none text-primary" onClick={()=>{navigate("/signup")}} onKeyPress={(e)=>{if (e.key==="Enter") {navigate("/signup")}}}  >
+                Inscription d'un nouvel utilisateur
             </Dropdown.Item>
         )
     }
 
     function DropDownItemLogin(){
         return(
-            <Dropdown.Item>
-                <Link className="text-decoration-none" to="/">Connexion Utilisateur</Link>
+            <Dropdown.Item className="text-decoration-none text-primary" onClick={()=>{navigate("/")}} onKeyPress={(e)=>{if (e.key==="Enter") {navigate("/")}}} >
+                Connexion Utilisateur
             </Dropdown.Item>
         )
     }
 
     function DropDownItemCreatePost(){
         return(
-            <Dropdown.Item>
-                <Link className="text-decoration-none" to="/newPost">Créer Post</Link>
+            <Dropdown.Item className="text-decoration-none text-primary" onClick={()=>{navigate("/newPost")}} onKeyPress={(e)=>{if (e.key==="Enter") {navigate("/newPost")}}} >
+                Créer Post
             </Dropdown.Item>
         )
     }
 
     function DropDownItemDeleteAccount(){
         return(
-            <Dropdown.Item>
-                <span className="text-decoration-none text-danger" onClick={deleteAccountHandler} >Supprimer compte</span>
+            <Dropdown.Item className="text-decoration-none text-danger" onClick={deleteAccountHandler} onKeyPress={(e)=>{if (e.key==="Enter") {deleteAccountHandler()}}} >
+                Supprimer compte
             </Dropdown.Item>
         )
     }
 
     function DropDownItemMyFeed(){
         return(
-            <Dropdown.Item>
-                <Link className="text-decoration-none" to="/myFeed" >Mon Fil</Link>
+            <Dropdown.Item className="text-decoration-none text-primary" onClick={()=>{navigate("/myFeed")}} onKeyPress={(e)=>{if (e.key==="Enter") {navigate("/myFeed")}}} >
+                Mon Fil
             </Dropdown.Item>
         )
     }
 
     function DropDownItemLogout(){
         return(
-            <Dropdown.Item>
-                <p className="text-decoration-none text-primary" onClick={logoutHandler} >Logout</p>
+            <Dropdown.Item className="text-decoration-none text-primary" onClick={logoutHandler} onKeyPress={(e)=>{if (e.key==="Enter") {logoutHandler()}}} >
+                Logout
             </Dropdown.Item>       
         )
     }
 
     function DropDownItemFeed(){
         return(
-        <Dropdown.Item>
-            <Link className="text-decoration-none" to="/feed">Fil</Link>
+        <Dropdown.Item className="text-decoration-none text-primary" onClick={()=>{navigate("/feed")}} onKeyPress={(e)=>{if (e.key==="Enter") {navigate("/feed")}}} >
+            Fil
         </Dropdown.Item>
         )
     }
@@ -108,8 +113,8 @@ function CustomDropdownMenu(props){
         console.log("isAdmin :", isAdmin)
         if(isAdmin){
             return(
-                <Dropdown.Item>
-                    <Link className="text-decoration-none" to="/adminPanel">Paneau d'administration</Link>
+                <Dropdown.Item className="text-decoration-none text-primary" onClick={()=>{navigate("/adminPanel")}} onKeyPress={(e)=>{if (e.key==="Enter") {navigate("/adminPanel")}}} >
+                    Paneau d'administration
                 </Dropdown.Item>
             )
         }

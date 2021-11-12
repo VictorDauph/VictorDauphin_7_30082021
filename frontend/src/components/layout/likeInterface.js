@@ -7,6 +7,8 @@ import { AuthContext } from "../../authentification/authContext"
 //Importation de l'APIContexte pour gestion de la fonction fecth like/dislike
 import ApiContext from "../../ApiHandling/ApiContext"
 
+import {Button} from 'react-bootstrap'
+
 function LikeInterface(props){
     console.log("like Interface props :", props)
     //changeMessage est la fonction qui permet d'afficher les messages d'erreurs
@@ -103,6 +105,7 @@ function LikeInterface(props){
             setUserHasLikedPost(isLiked)
             //modification du nombre de likes en React. Il faut d'abord vérifier si l'user est dans le tableau des likes ou des dislikes du post puis le supprimer du tableau corresponsant avec splice.
             function checkAndDeleteUser(ArrayToCheck){ //Cette fonction est utilisable avec le tableau like et le tableau dislike. On vérifie d'abord la présence de l'utilisateur dans le tableau, puis on l'enlève s'il est présent.
+                console.log("ArrayToCheck", ArrayToCheck)
                 const UserIndex = ArrayToCheck.indexOf(authentifiedUserId)
                 if(UserIndex >= 0){
                     ArrayToCheck.splice(UserIndex,1)
@@ -131,22 +134,22 @@ function LikeInterface(props){
     if(UserHasLikedPost==1)
         return(
             <span> {/*Pouce levé blanc et clickable, pouce baissé bleu  non clickable */}
-                <span className="text-white arrow cursor-pointer mx-1" onClick={unlikePostHandler}> <i className="fas fa-thumbs-up"></i> </span> {upVotes}
+                <Button variant="link" className="text-light cursor-pointer text-decoration-none thumb-button mx-0" onClick={unlikePostHandler} onKeyPress={(e)=>{if (e.key==="Enter") {unlikePostHandler()}}} ><i className="fas fa-thumbs-up"></i></Button>{upVotes}
                 <span className="text-primary mx-1" > <i className="fas fa-thumbs-down"></i> </span> {downVotes} 
             </span>
         )
     else if(UserHasLikedPost==0)
         return(
             <span> {/*Pouce levé bleu et clickable, pouce baissé bleu et clickable */}
-                <span className="text-primary arrow cursor-pointer mx-1" onClick={likePostHandler}> <i className="fas fa-thumbs-up"></i> </span> {upVotes}
-                <span className="text-primary arrow cursor-pointer mx-1" onClick={dislikePostHandler}> <i className="fas fa-thumbs-down"></i> </span> {downVotes} 
+                <Button variant="link" className="text-primary cursor-pointer text-decoration-none thumb-button mx-0" onClick={likePostHandler} onKeyPress={(e)=>{if (e.key==="Enter") {likePostHandler()}}} ><i className="fas fa-thumbs-up"></i></Button>{upVotes}
+                <Button variant="link" className="text-primary cursor-pointer text-decoration-none thumb-button mx-0" onClick={dislikePostHandler} onKeyPress={(e)=>{if (e.key==="Enter") {dislikePostHandler()}}} ><i className="fas fa-thumbs-down"></i></Button>{downVotes}
             </span>
         )
     else if(UserHasLikedPost==-1)
         return(
             <span> {/*Pouce levé bleu et non clickable, pouce baissé blanc et clickable */}
                 <span className="text-primary arrow mx-1"> <i className="fas fa-thumbs-up"></i> </span> {upVotes}
-                <span className="text-white arrow cursor-pointer mx-1" onClick={unlikePostHandler}> <i className="fas fa-thumbs-down"></i> </span> {downVotes} 
+                <Button variant="link" className="text-white cursor-pointer text-decoration-none thumb-button mx-0" onClick={unlikePostHandler} onKeyPress={(e)=>{if (e.key==="Enter") {unlikePostHandler()}}} ><i className="fas fa-thumbs-down"></i></Button>{downVotes} 
             </span>
         )
 

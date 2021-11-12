@@ -105,7 +105,7 @@ Cette étape peut prendre quelques minutes.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Relancer l'application une fois installée:
-1) S'assurer que le service mySql est lancé:
+1) S'assurer que le service mySql est lancé
 
 2) lancer le serveur frontend:
 cd frontend
