@@ -85,7 +85,7 @@ export function ApiContextProvider(props) { //à chaque fois que FetchContext es
                 AuthCtx.logout(redirectionIfFailed)
             })
         })
-}
+    }
 
     //fonction qui permet de liker 1, unliker 0 et disliker -1 un post.
     function likePost(like,postId,userId){
