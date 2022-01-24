@@ -114,3 +114,16 @@ npm start
 3) lancer le serveur backend depuis un autre terminal:
 cd backend
 nodemon server
+
+------------------------------------------------------------------------------------------------------------------
+
+Version en ligne:
+BDD:
+groupomania_bdd
+https://db4free.net/phpMyAdmin/index.php?route=/sql&db=groupomania_bdd&table=Users&pos=0
+
+API:
+https://dashboard.heroku.com/apps/victor-groupomania-api/deploy/heroku-git
+
+Serveur React:
+https://dashboard.heroku.com/apps/victor-groupomania-frontend/deploy/heroku-git
