@@ -5,6 +5,23 @@ Ce projet est un réseau social style 9gag, qui permet à des utilisateurs appar
 Installation du serveur backend et de la Base de données:
 La base de données utilisée pour ce projet est une base de donnée MYSQL. L'API pilote la base de donnée et son installation via Sequelize. Elle utilise des migrations pour créer les tables et les relations entre tables.
 
+-----------------------------------------------------------------------------------------------------------
+
+Version en ligne:
+
+Serveur React:
+https://dashboard.heroku.com/apps/victor-groupomania-frontend/deploy/heroku-git
+
+API:
+https://dashboard.heroku.com/apps/victor-groupomania-api/deploy/heroku-git
+
+BDD:
+groupomania_bdd
+https://db4free.net/phpMyAdmin/index.php?route=/sql&db=groupomania_bdd&table=Users&pos=0
+
+
+-----------------------------------------------------------------------------------------------------------
+
 Pour faire fonctionner cette application en local il faut suivre les étapes suivantes:
 A) Création de la base de données
 
@@ -117,13 +134,3 @@ nodemon server
 
 ------------------------------------------------------------------------------------------------------------------
 
-Version en ligne:
-BDD:
-groupomania_bdd
-https://db4free.net/phpMyAdmin/index.php?route=/sql&db=groupomania_bdd&table=Users&pos=0
-
-API:
-https://dashboard.heroku.com/apps/victor-groupomania-api/deploy/heroku-git
-
-Serveur React:
-https://dashboard.heroku.com/apps/victor-groupomania-frontend/deploy/heroku-git
